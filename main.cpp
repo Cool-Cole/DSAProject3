@@ -1,9 +1,10 @@
 #include <iostream>
 #include <fstream>
-#include "pixelUpdate.h"
 
 using namespace std;
 
+#include "CSVparse.h"
+#include "pixelUpdate.h"
 
 
 int main() {
