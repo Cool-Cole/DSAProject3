@@ -10,6 +10,8 @@ using namespace std;
 class pixelUpdate{
 public:
     pixelUpdate(){}
+
+
 };
 
 #endif //DSAPROJECT3_PIXELUPDATE_H
