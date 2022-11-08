@@ -7,6 +7,8 @@
 
 #include <vector>
 
+using namespace std;
+
 // This is a function I wrote to help parse strings
 // I have been using it since programming 2
 // This function takes a string and splits it into a vector of strings seperated by a delimiter
