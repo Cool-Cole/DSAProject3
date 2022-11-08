@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-
 #include "CSVparse.h"
 #include "pixelUpdate.h"
 
@@ -11,9 +10,14 @@ void pixelUpdateLoader(){
 
     string timestamp, user_id, pixel_color, coordinate;
 
-    while()
+    while(getline(csv, timestamp, ',')){
+        getline(csv, user_id, ',');
+        getline(csv, pixel_color, ',');
+        getline(csv, pixel_color, ',');
+        getline(csv, coordinate, ',');
 
-        //test
+        cout << "uwu" << endl;
+    }
 
 }
 
