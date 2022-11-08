@@ -6,15 +6,16 @@
 using namespace std;
 
 void pixelUpdateLoader(){
-    ifstream csv("/CSVData/example.csv");
+    ifstream csv("./CSVData/example.csv");
 
-    string timestamp, user_id, pixel_color, coordinate;
+    string line;
 
-    while(getline(csv, timestamp, ',')){
-        getline(csv, user_id, ',');
-        getline(csv, pixel_color, ',');
-        getline(csv, pixel_color, ',');
-        getline(csv, coordinate, ',');
+    while(getline(csv, line)){
+        vector<string> temp = stringToVector(line, ',');
+
+        for(auto it = temp.begin(); it != temp.end(); it++){
+            cout << it->c_str() << endl;
+        }
 
         cout << "uwu" << endl;
     }
@@ -23,6 +24,8 @@ void pixelUpdateLoader(){
 
 int main() {
     cout << "Hello, World!" << endl;
-    // Dylan was here
+
+    pixelUpdateLoader();
+
     return 0;
 }
