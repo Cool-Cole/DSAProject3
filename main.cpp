@@ -1,11 +1,10 @@
 #include <iostream>
 #include <fstream>
 
-using namespace std;
-
 #include "CSVparse.h"
 #include "pixelUpdate.h"
 
+using namespace std;
 
 int main() {
     cout << "Hello, World!" << endl;
