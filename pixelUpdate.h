@@ -9,9 +9,13 @@ using namespace std;
 
 class pixelUpdate{
 public:
-    pixelUpdate(){}
+    pixelUpdate(string date){
+    }
 
+    int dateTime, pixelX, pixelY;
+    string userID;
 
+    pixelUpdate *next = nullptr;
 };
 
 #endif //DSAPROJECT3_PIXELUPDATE_H
