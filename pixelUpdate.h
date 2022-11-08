@@ -12,10 +12,12 @@ public:
     pixelUpdate(string date){
     }
 
-    int dateTime, pixelX, pixelY;
-    string userID;
+    int timeSinceStart, pixelX, pixelY;
+    string userID, dateTime;
 
     pixelUpdate *next = nullptr;
+
+    //copy operator needed!!
 };
 
 #endif //DSAPROJECT3_PIXELUPDATE_H

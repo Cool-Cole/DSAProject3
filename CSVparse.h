@@ -30,4 +30,27 @@ vector<string> stringToVector(string str, char delim){
     return ret;
 }
 
+int timeInSecondsCalculator(string timeStr){
+    int time = 0;
+    time += (stoi(timeStr, ));
+}
+
+void pixelUpdateLoader(){
+    ifstream csv("./CSVData/example.csv");
+
+    string line;
+
+    while(getline(csv, line)){
+        vector<string> pixelDataRAW = stringToVector(line, ',');
+
+        for(auto it = pixelDataRAW.begin(); it != pixelDataRAW.end(); it++){
+            cout << it->c_str() << endl;
+        }
+
+        int timeSinceStart = timeInSecondsCalculator(pixelDataRAW.at(0));
+
+    }
+
+}
+
 #endif //DSAPROJECT3_CSVPARSE_H
