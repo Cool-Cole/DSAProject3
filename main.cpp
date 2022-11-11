@@ -6,7 +6,7 @@
 using namespace std;
 
 int main() {
-    cout << "Hello, World!" << endl;
+    cout << "Hewwo, World!" << endl;
 
     pixelUpdateLoader();
 

@@ -9,15 +9,33 @@ using namespace std;
 
 class pixelUpdate{
 public:
-    pixelUpdate(string date){
+
+    //Primary Constructor
+    pixelUpdate(string dateTime, int timeSinceStart, string userID, string color, int pixelX, int pixelY){
+        this->dateTime = dateTime;
+        this->timeSinceStart = timeSinceStart;
+        this->userID = userID;
+        this->color = color;
+        this->pixelX = pixelX;
+        this->pixelY = pixelY;
+    }
+
+    //Copy Constructor (Please use this to replicate elements when creating new datastructures!!!)
+    pixelUpdate(const pixelUpdate *old){
+        this->dateTime = old->dateTime;
+        this->timeSinceStart = old->timeSinceStart;
+        this->userID = old->userID;
+        this->color = old->color;
+        this->pixelX = old->pixelX;
+        this->pixelY = old->pixelY;
+        this->next = old->next;
     }
 
     int timeSinceStart, pixelX, pixelY;
-    string userID, dateTime;
+    string userID, dateTime, color;
 
     pixelUpdate *next = nullptr;
 
-    //copy operator needed!!
 };
 
 #endif //DSAPROJECT3_PIXELUPDATE_H
