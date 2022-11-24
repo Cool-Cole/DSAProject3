@@ -7,6 +7,8 @@ using namespace std;
 #ifndef DSAPROJECT3_PIXELUPDATE_H
 #define DSAPROJECT3_PIXELUPDATE_H
 
+#include <string>
+
 class pixelUpdate{
 public:
 
@@ -29,6 +31,11 @@ public:
         this->pixelX = old->pixelX;
         this->pixelY = old->pixelY;
         this->next = old->next;
+    }
+
+    // for testing b+ tree
+    pixelUpdate(string userID){
+        this->userID = userID;
     }
 
     int timeSinceStart, pixelX, pixelY;
