@@ -12,6 +12,13 @@
 
 using namespace std;
 
+#include <iostream>
+#include <vector>
+#include <math.h>
+#include "pixelUpdate.h"
+
+using namespace std;
+
 class Node {
 public:
     bool isLeaf;
@@ -31,6 +38,8 @@ public:
         for(int i=0; i<childPtr.size(); i++){
             childPtr.at(i) == nullptr;
         }
+        parentNodePtr = nullptr;
+        nextLeafPtr = nullptr;
     }
     //for leaf nodes
     Node(pixelUpdate* pixel, int maxLeaves){
@@ -41,6 +50,8 @@ public:
         for(int i=0; i<childPtr.size(); i++){
             childPtr.at(i) == nullptr;
         }
+        parentNodePtr = nullptr;
+        nextLeafPtr = nullptr;
     }
 };
 
