@@ -60,7 +60,7 @@ void pixelUpdateLoader(vector<pixelUpdate*> &pixelUpdatesRAW, const string &file
         pixelDataRAW.at(3) = pixelDataRAW.at(3).substr(1, pixelDataRAW.at(3).size());
         pixelDataRAW.at(4) = pixelDataRAW.at(4).substr(0, pixelDataRAW.at(4).size() - 1);
 
-        pixelUpdatesRAW.push_back(new pixelUpdate(pixelDataRAW.at(0), timeSinceStart, pixelDataRAW.at(1), pixelDataRAW.at(2), stoi(pixelDataRAW.at(3)), stoi(pixelDataRAW.at(4))));
+        pixelUpdatesRAW.push_back(new pixelUpdate(pixelDataRAW.at(0), timeSinceStart, pixelDataRAW.at(1), pixelDataRAW.at(2), stoi(pixelDataRAW.at(3)), stoi(pixelDataRAW.at(4)),pixelDataRAW.at(3)+pixelDataRAW.at(4)));
 
     }
 }

@@ -13,13 +13,14 @@ class pixelUpdate{
 public:
 
     //Primary Constructor
-    pixelUpdate(string dateTime, unsigned int timeSinceStart, string userID, string color, int pixelX, int pixelY){
+    pixelUpdate(string dateTime, unsigned int timeSinceStart, string userID, string color, int pixelX, int pixelY, string coords){
         this->dateTime = dateTime;
         this->timeSinceStart = timeSinceStart;
         this->userID = userID;
         this->color = color;
         this->pixelX = pixelX;
         this->pixelY = pixelY;
+        this->coords = coords;
     }
 
     //Copy Constructor (Please use this to replicate elements when creating new datastructures!!!)
@@ -38,7 +39,7 @@ public:
     }
 
     unsigned int timeSinceStart, pixelX, pixelY;
-    string userID, dateTime, color;
+    string userID, dateTime, color, coords;
 
 };
 

@@ -6,7 +6,6 @@
 
 using namespace std;
 
-
 int main(int argc, char **argv) {
 
     // Sanity check to ensure that the user isn't just running this binary without arguments
@@ -52,10 +51,17 @@ int main(int argc, char **argv) {
         cout << "The r/place data set is being loaded into memory as a bplustree... (this might take a while)" << endl;
 
         // TODO set up bplustree
+        bplusTree userid_tree;
+        bplusTree color_tree;
+        bplusTree coordinate_tree;
+        for(auto it = rawPixelData.begin(); it != rawPixelData.end(); it++){
+            userid_tree.insertID(*it);
+            color_tree.insertColor(*it);
+            coordinate_tree.insertCoordinates(*it);
+        }
 
         cout << "The r/place data set has been successfully loaded into memory!" << endl;
     }
-
 
 
 

@@ -25,7 +25,9 @@ class bplusTree {
 public:
     bplusTree();
     //~bplusTree();
-    void insert(pixelUpdate* pixel);
+    void insertID(pixelUpdate* pixel);
+    void insertColor(pixelUpdate* pixel);
+    void insertCoordinates(pixelUpdate* pixel);
     void search(string searchData);
     void printbplusTree(Node* root);
     Node* getRoot();
@@ -59,7 +61,7 @@ void bplusTree::insertInnerNode(Node* ptr, unsigned long long inputHashData, Nod
     ptr->childPtr[i+1] = rightChild;
 }
 
-void bplusTree::insert(pixelUpdate* pixel) {
+void bplusTree::insertID(pixelUpdate* pixel) {
     hash<string> hasher;
     unsigned long long inputHashData = hasher(pixel->userID);
     // for input is smaller int string, no hash
@@ -178,6 +180,198 @@ void bplusTree::printbplusTree(Node* root) {
             for (int i = 0; i < ptr->nodeSize + 1; i++) {
                 printbplusTree(ptr->childPtr.at(i));
             }
+        }
+    }
+}
+
+void bplusTree::insertColor(pixelUpdate* pixel) {
+    hash<string> hasher;
+    unsigned long long inputHashData = hasher(pixel->color);
+    // for input is smaller int string, no hash
+    //unsigned long long inputHashData = stoll(pixel->userID); // for testing
+    // for debug
+    /*if(inputHashData == 32){
+        cout << "debug point" << endl;
+    }*/
+    if (root == nullptr) {
+        //initialize data nodes
+        root = new Node(pixel, maxLeaves);
+        root->isLeaf = true;
+        root->nodeSize = 1;
+        root->hashKey.at(0) = inputHashData;
+    }
+    else {
+        Node* nodePtr = root;
+        //find leaf nodes
+        while (!nodePtr->isLeaf) {
+            for (int i = 0; i < nodePtr->nodeSize; i++) {
+                if (inputHashData < nodePtr->hashKey.at(i)) {
+                    nodePtr = nodePtr->childPtr.at(i);
+                    break;
+                }
+                // when it reaches end of array of nodes, continue searching down right tree
+                if (i == nodePtr->nodeSize - 1) {
+                    nodePtr = nodePtr->childPtr.at(i + 1);
+                    break;
+                }
+            }
+        }
+        //insert input data to the sorted key place
+        insertLeafNode(nodePtr, inputHashData);
+        //check if need to split nodeptr nodes if over the limit
+        while((nodePtr->isLeaf && nodePtr->nodeSize>maxLeaves) || (!nodePtr->isLeaf && nodePtr->nodeSize>maxLeaves-1)) {
+            if (nodePtr->isLeaf) {
+                //handle split node
+                Node *splitNode = new Node(pixel, maxLeaves);
+                int splitIndex = maxLeaves / 2;
+                splitNode->nodeSize = nodePtr->nodeSize - splitIndex;
+                for (int i = splitIndex, j = 0; i < nodePtr->nodeSize; i++, j++) {
+                    splitNode->hashKey.at(j) = nodePtr->hashKey.at(i);
+                }
+                splitNode->isLeaf = true;
+                splitNode->parentNodePtr = nodePtr->parentNodePtr;
+                // set nodeptr, links the leaf nodes together
+                nodePtr->nextLeafPtr = splitNode;
+                nodePtr->nodeSize = splitIndex;
+                // handles parent
+                if (nodePtr->parentNodePtr == nullptr) {
+                    Node *newParent = new Node(maxLeaves);
+                    newParent->hashKey.at(0) = splitNode->hashKey.at(0);
+                    newParent->nodeSize = 1;
+                    newParent->childPtr.at(0) = nodePtr;
+                    newParent->childPtr.at(1) = splitNode;
+                    newParent->isLeaf = false;
+                    nodePtr->parentNodePtr = newParent;
+                    splitNode->parentNodePtr = newParent;
+                    root = newParent;
+                } else {
+                    insertInnerNode(nodePtr->parentNodePtr, splitNode->hashKey.at(0), splitNode);
+                }
+            }
+                // else split non leaf node
+            else {
+                Node *splitNode = new Node(maxLeaves);
+                int splitIndex = (maxLeaves - 1) / 2;
+                splitNode->nodeSize = nodePtr->nodeSize - splitIndex - 1;
+                for (int i = splitIndex + 1, j = 0; i < nodePtr->nodeSize; i++, j++) {
+                    splitNode->hashKey.at(j) = nodePtr->hashKey.at(i);
+                    splitNode->childPtr.at(j) = nodePtr->childPtr.at(i);
+                }
+                splitNode->childPtr.at(splitNode->nodeSize) = nodePtr->childPtr.at(nodePtr->nodeSize);
+                //nodeptr resized to new left node size
+                nodePtr->nodeSize = splitIndex;
+                splitNode->parentNodePtr = nodePtr->parentNodePtr;
+                // handles parent
+                if (nodePtr->parentNodePtr == nullptr) {
+                    Node *newParent = new Node(maxLeaves);
+                    newParent->hashKey.at(0) = nodePtr->hashKey.at(splitIndex);
+                    newParent->nodeSize = 1;
+                    newParent->childPtr.at(0) = nodePtr;
+                    newParent->childPtr.at(1) = splitNode;
+                    nodePtr->parentNodePtr = newParent;
+                    splitNode->parentNodePtr = newParent;
+                    root = newParent;
+                } else {
+                    insertInnerNode(nodePtr->parentNodePtr, nodePtr->hashKey.at(splitIndex), splitNode);
+                }
+            }
+            nodePtr = nodePtr->parentNodePtr;
+        }
+    }
+}
+
+void bplusTree::insertCoordinates(pixelUpdate* pixel) {
+    hash<string> hasher;
+    unsigned long long inputHashData = hasher(pixel->coords);
+    // for input is smaller int string, no hash
+    //unsigned long long inputHashData = stoll(pixel->userID); // for testing
+    // for debug
+    /*if(inputHashData == 32){
+        cout << "debug point" << endl;
+    }*/
+    if (root == nullptr) {
+        //initialize data nodes
+        root = new Node(pixel, maxLeaves);
+        root->isLeaf = true;
+        root->nodeSize = 1;
+        root->hashKey.at(0) = inputHashData;
+    }
+    else {
+        Node* nodePtr = root;
+        //find leaf nodes
+        while (!nodePtr->isLeaf) {
+            for (int i = 0; i < nodePtr->nodeSize; i++) {
+                if (inputHashData < nodePtr->hashKey.at(i)) {
+                    nodePtr = nodePtr->childPtr.at(i);
+                    break;
+                }
+                // when it reaches end of array of nodes, continue searching down right tree
+                if (i == nodePtr->nodeSize - 1) {
+                    nodePtr = nodePtr->childPtr.at(i + 1);
+                    break;
+                }
+            }
+        }
+        //insert input data to the sorted key place
+        insertLeafNode(nodePtr, inputHashData);
+        //check if need to split nodeptr nodes if over the limit
+        while((nodePtr->isLeaf && nodePtr->nodeSize>maxLeaves) || (!nodePtr->isLeaf && nodePtr->nodeSize>maxLeaves-1)) {
+            if (nodePtr->isLeaf) {
+                //handle split node
+                Node *splitNode = new Node(pixel, maxLeaves);
+                int splitIndex = maxLeaves / 2;
+                splitNode->nodeSize = nodePtr->nodeSize - splitIndex;
+                for (int i = splitIndex, j = 0; i < nodePtr->nodeSize; i++, j++) {
+                    splitNode->hashKey.at(j) = nodePtr->hashKey.at(i);
+                }
+                splitNode->isLeaf = true;
+                splitNode->parentNodePtr = nodePtr->parentNodePtr;
+                // set nodeptr, links the leaf nodes together
+                nodePtr->nextLeafPtr = splitNode;
+                nodePtr->nodeSize = splitIndex;
+                // handles parent
+                if (nodePtr->parentNodePtr == nullptr) {
+                    Node *newParent = new Node(maxLeaves);
+                    newParent->hashKey.at(0) = splitNode->hashKey.at(0);
+                    newParent->nodeSize = 1;
+                    newParent->childPtr.at(0) = nodePtr;
+                    newParent->childPtr.at(1) = splitNode;
+                    newParent->isLeaf = false;
+                    nodePtr->parentNodePtr = newParent;
+                    splitNode->parentNodePtr = newParent;
+                    root = newParent;
+                } else {
+                    insertInnerNode(nodePtr->parentNodePtr, splitNode->hashKey.at(0), splitNode);
+                }
+            }
+                // else split non leaf node
+            else {
+                Node *splitNode = new Node(maxLeaves);
+                int splitIndex = (maxLeaves - 1) / 2;
+                splitNode->nodeSize = nodePtr->nodeSize - splitIndex - 1;
+                for (int i = splitIndex + 1, j = 0; i < nodePtr->nodeSize; i++, j++) {
+                    splitNode->hashKey.at(j) = nodePtr->hashKey.at(i);
+                    splitNode->childPtr.at(j) = nodePtr->childPtr.at(i);
+                }
+                splitNode->childPtr.at(splitNode->nodeSize) = nodePtr->childPtr.at(nodePtr->nodeSize);
+                //nodeptr resized to new left node size
+                nodePtr->nodeSize = splitIndex;
+                splitNode->parentNodePtr = nodePtr->parentNodePtr;
+                // handles parent
+                if (nodePtr->parentNodePtr == nullptr) {
+                    Node *newParent = new Node(maxLeaves);
+                    newParent->hashKey.at(0) = nodePtr->hashKey.at(splitIndex);
+                    newParent->nodeSize = 1;
+                    newParent->childPtr.at(0) = nodePtr;
+                    newParent->childPtr.at(1) = splitNode;
+                    nodePtr->parentNodePtr = newParent;
+                    splitNode->parentNodePtr = newParent;
+                    root = newParent;
+                } else {
+                    insertInnerNode(nodePtr->parentNodePtr, nodePtr->hashKey.at(splitIndex), splitNode);
+                }
+            }
+            nodePtr = nodePtr->parentNodePtr;
         }
     }
 }
