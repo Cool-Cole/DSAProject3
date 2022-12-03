@@ -13,7 +13,7 @@ class pixelUpdate{
 public:
 
     //Primary Constructor
-    pixelUpdate(string dateTime, int timeSinceStart, string userID, string color, int pixelX, int pixelY){
+    pixelUpdate(string dateTime, unsigned int timeSinceStart, string userID, string color, int pixelX, int pixelY){
         this->dateTime = dateTime;
         this->timeSinceStart = timeSinceStart;
         this->userID = userID;
@@ -30,7 +30,7 @@ public:
         this->color = old->color;
         this->pixelX = old->pixelX;
         this->pixelY = old->pixelY;
-        this->next = old->next;
+        //this->next = old->next;
     }
 
     // for testing b+ tree
@@ -38,10 +38,10 @@ public:
         this->userID = userID;
     }
 
-    int timeSinceStart, pixelX, pixelY;
+    unsigned int timeSinceStart, pixelX, pixelY;
     string userID, dateTime, color;
 
-    pixelUpdate *next = nullptr;
+    //pixelUpdate *next = nullptr;
 
 };
 
