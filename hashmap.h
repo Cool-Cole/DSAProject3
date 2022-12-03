@@ -51,7 +51,7 @@ public:
         } else if(keyType == USERID) {
             buckets.at(hash(temp->userID)).push_back(temp);
         } else if(keyType == COLOR) {
-
+            hashColor(temp->color);
         }
 
     }
@@ -73,7 +73,42 @@ public:
     }
 
     unsigned int hashColor(string color){
-        return 0;
+        if(color == "#00CCC0"){
+            return 0;
+        } else if(color == "#94B3FF"){
+            return 1;
+        } else if(color == "#6A5CFF"){
+            return 2;
+        } else if(color == "#009EAA"){
+            return 3;
+        } else if(color == "#E4ABFF"){
+            return 4;
+        } else if(color == "#000000"){
+            return 5;
+        } else if(color == "#00756F"){
+            return 6;
+        } else if(color == "#00A368"){
+            return 7;
+        } else if(color == "#00CC78"){
+            return 8;
+        } else if(color == "#2450A4"){
+            return 9;
+        } else if(color == "#3690EA"){
+            return 10;
+        } else if(color == "#493AC1"){
+            return 11;
+        } else if(color == "#515252"){
+            return 12;
+        } else if(color == "#51E9F4"){
+            return 13;
+        } else if(color == "#6D001A"){
+            return 14;
+        }
+
+         else {
+            cout << "Unknown color: " + color << endl;
+            exit(1);
+        }
     }
 
 };
