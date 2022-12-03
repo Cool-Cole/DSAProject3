@@ -69,8 +69,29 @@ int main(int argc, char **argv) {
         cout << "The r/place data set has been successfully loaded as a B+ Tree!" << endl;
     }
 
+    int userChoice = 0;
+    string userString;
+    while(true){
+        cout << "1. Get information of encoded Reddit User ID" << endl;
+        cout << "2. Get information of pixel coordinate" << endl;
+        cout << "3. Get information of color type" << endl;
+        cout << "4. Quit the program"  << endl;
+        cout << "Enter number: " << endl;
 
+        cin >> userChoice;
 
+        switch (userChoice) {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                cout << "Quitting..." << endl;
+                return 0;
+        }
+    }
 
 
     return 0;
