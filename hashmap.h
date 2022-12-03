@@ -56,7 +56,7 @@ public:
     }
 
     unsigned int hash(unsigned int x, unsigned int y){
-        return (x ^ y) % bucketCount;
+        return (x ^ (y << 1)) % bucketCount;
     }
 
     unsigned int hash(string userID){
