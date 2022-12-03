@@ -46,7 +46,7 @@ int timeInSecondsCalculator(string timeStr){
 }
 
 void pixelUpdateLoader(vector<pixelUpdate*> &pixelUpdatesRAW, const string &filename){
-    ifstream csv(filename);
+    ifstream csv("../" + filename);
 
     string line;
 
