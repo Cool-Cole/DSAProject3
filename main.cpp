@@ -9,8 +9,6 @@ using namespace std;
 
 int main(int argc, char **argv) {
 
-    int a;
-
     // Sanity check to ensure that the user isn't just running this binary without arguments
     if(argc < 3){
         cout << "Please ensure that you are running ./project3 -hashmap data.csv or ./project3 -bplustree data.csv." << endl;
