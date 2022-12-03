@@ -1,7 +1,6 @@
 #include <iostream>
 #include <fstream>
 #include "CSVparse.h"
-#include "pixelUpdate.h"
 #include "bplustree.h"
 
 using namespace std;
@@ -15,7 +14,9 @@ int main(int argc, char **argv) {
         return 0;
     }
 
+    vector<pixelUpdate*> rawPixelData;
 
+    pixelUpdateLoader(rawPixelData, argv[2]); // Load the file information into the rawPixelData array
 
     if(argv[1] == "-hashmap"){
 
