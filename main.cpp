@@ -7,15 +7,6 @@
 using namespace std;
 
 
-int a(){
-
-}
-
-int b(){
-
-
-}
-
 int main(int argc, char **argv) {
 
     // Sanity check to ensure that the user isn't just running this binary without arguments
