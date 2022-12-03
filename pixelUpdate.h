@@ -30,7 +30,6 @@ public:
         this->color = old->color;
         this->pixelX = old->pixelX;
         this->pixelY = old->pixelY;
-        //this->next = old->next;
     }
 
     // for testing b+ tree
@@ -40,8 +39,6 @@ public:
 
     unsigned int timeSinceStart, pixelX, pixelY;
     string userID, dateTime, color;
-
-    //pixelUpdate *next = nullptr;
 
 };
 
