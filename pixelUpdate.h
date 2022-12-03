@@ -7,11 +7,13 @@ using namespace std;
 #ifndef DSAPROJECT3_PIXELUPDATE_H
 #define DSAPROJECT3_PIXELUPDATE_H
 
+#include <string>
+
 class pixelUpdate{
 public:
 
     //Primary Constructor
-    pixelUpdate(string dateTime, int timeSinceStart, string userID, string color, int pixelX, int pixelY){
+    pixelUpdate(string dateTime, unsigned int timeSinceStart, string userID, string color, int pixelX, int pixelY){
         this->dateTime = dateTime;
         this->timeSinceStart = timeSinceStart;
         this->userID = userID;
@@ -28,13 +30,15 @@ public:
         this->color = old->color;
         this->pixelX = old->pixelX;
         this->pixelY = old->pixelY;
-        this->next = old->next;
     }
 
-    int timeSinceStart, pixelX, pixelY;
-    string userID, dateTime, color;
+    // for testing b+ tree
+    pixelUpdate(string userID){
+        this->userID = userID;
+    }
 
-    pixelUpdate *next = nullptr;
+    unsigned int timeSinceStart, pixelX, pixelY;
+    string userID, dateTime, color;
 
 };
 
