@@ -10,11 +10,6 @@
 
 using namespace std;
 
-class CSVparse{
-
-
-};
-
 
 // This is a function I wrote to help parse strings
 // I have been using it since programming 2
@@ -48,12 +43,10 @@ int timeInSecondsCalculator(string timeStr){
     return time;
 }
 
-void pixelUpdateLoader(){
-    ifstream csv("./CSVData/2022_place_canvas_history.csv");
+void pixelUpdateLoader(vector<pixelUpdate*> &pixelUpdatesRAW, const string &filename){
+    ifstream csv(filename);
 
     string line;
-
-    vector<pixelUpdate*> *pixelUpdatesRAW = new vector<pixelUpdate*>;
 
     //Throws out the titles from the original csv.
     getline(csv, line);
@@ -61,30 +54,15 @@ void pixelUpdateLoader(){
     while(getline(csv, line)){
         vector<string> pixelDataRAW = stringToVector(line, ',');
 
-        /*
-        for(auto it = pixelDataRAW.begin(); it != pixelDataRAW.end(); it++){
-            cout << it->c_str() << endl;
-        }
-         */
-
         //Calculates how long in seconds it has been since the start.
         int timeSinceStart = timeInSecondsCalculator(pixelDataRAW.at(0));
 
         pixelDataRAW.at(3) = pixelDataRAW.at(3).substr(1, pixelDataRAW.at(3).size());
         pixelDataRAW.at(4) = pixelDataRAW.at(4).substr(0, pixelDataRAW.at(4).size() - 1);
 
-        pixelUpdatesRAW->push_back(new pixelUpdate(pixelDataRAW.at(0), timeSinceStart, pixelDataRAW.at(1), pixelDataRAW.at(2), stoi(pixelDataRAW.at(3)), stoi(pixelDataRAW.at(4))));
+        pixelUpdatesRAW.push_back(new pixelUpdate(pixelDataRAW.at(0), timeSinceStart, pixelDataRAW.at(1), pixelDataRAW.at(2), stoi(pixelDataRAW.at(3)), stoi(pixelDataRAW.at(4))));
 
     }
-
-    //Call data structure creators here using pixelUpdatesRaw, which contains all of the pixel data in a single vector:
-
-    //B+ Trees:
-
-
-    //Hash Maps:
-
-    cout << "done" << endl;
 }
 
 #endif //DSAPROJECT3_CSVPARSE_H
