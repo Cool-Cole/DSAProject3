@@ -30,14 +30,13 @@ public:
 
         nodeCount = 0;
 
-        if(key == CORD){
+        if(keyType == CORD){
             bucketCount = 2000;
-        } else if(key == USERID){
+        } else if(keyType == USERID){
             bucketCount = 2000;
-        } else if(key == COLOR){
+        } else if(keyType == COLOR){
             bucketCount = 16;
         }
-
 
         buckets.resize(bucketCount);
     }
