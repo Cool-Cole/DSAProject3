@@ -10,16 +10,24 @@
 
 using namespace std;
 
+enum flag {CORD, USERID, COLOR};
+
 class Hashmap {
 
     unsigned int nodeCount;
     unsigned int bucketCount;
 
+    flag keyType;
+
+
     vector<vector<pixelUpdate*>> buckets;
 
 public:
 
-    Hashmap(){
+    Hashmap(flag key){
+
+        keyType = key;
+
         nodeCount = 0;
         bucketCount = 2000;
 
@@ -29,11 +37,26 @@ public:
     void insert(pixelUpdate* temp){
         nodeCount++;
 
-        buckets.at(hash(temp->pixelX, temp->pixelY)).push_back(temp);
+        if(keyType == CORD){
+            buckets.at(hash(temp->pixelX, temp->pixelY)).push_back(temp);
+        } else if(keyType == USERID) {
+
+        } else if(keyType == COLOR) {
+
+        }
+
     }
 
     unsigned int hash(unsigned int x, unsigned int y){
         return x ^ y;
+    }
+
+    unsigned int hash(string userID){
+        return 0;
+    }
+
+    unsigned int hashColor(string color){
+        return 0;
     }
 
 };
