@@ -7,4 +7,4 @@ add_compile_options(-march=native)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(DSAProject3 main.cpp bplustree.cpp bplustree.h treeNode.h)
+add_executable(DSAProject3 main.cpp bplustree.h treeNode.h)
