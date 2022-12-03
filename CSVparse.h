@@ -6,10 +6,15 @@
 #define DSAPROJECT3_CSVPARSE_H
 
 #include <vector>
-#include <thread>
 #include "pixelUpdate.h"
 
 using namespace std;
+
+class CSVparse{
+
+
+};
+
 
 // This is a function I wrote to help parse strings
 // I have been using it since programming 2
