@@ -7,6 +7,15 @@
 using namespace std;
 
 
+int a(){
+
+}
+
+int b(){
+
+
+}
+
 int main(int argc, char **argv) {
 
     // Sanity check to ensure that the user isn't just running this binary without arguments
@@ -42,7 +51,7 @@ int main(int argc, char **argv) {
         for(auto it = rawPixelData.begin(); it != rawPixelData.end(); it++){
             cord_map.insert(*it);
             userid_map.insert(*it);
-            //color_map.insert(*it);
+            color_map.insert(*it);
         }
 
         cout << "The r/place data set has been successfully loaded into memory!" << endl;
@@ -54,8 +63,10 @@ int main(int argc, char **argv) {
         // TODO set up bplustree
 
         cout << "The r/place data set has been successfully loaded into memory!" << endl;
-
     }
+
+
+
 
 
 
