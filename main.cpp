@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
      */
 
 
-    if(argv[1] == "-hashmap"){
+    if(argv[1] == (string)"-hashmap"){
 
         cout << "The r/place data set is being loaded into memory as a hashmap... (this might take a while)" << endl;
 
@@ -41,13 +41,13 @@ int main(int argc, char **argv) {
 
         for(auto it = rawPixelData.begin(); it != rawPixelData.end(); it++){
             cord_map.insert(*it);
-            //userid_map.insert(*it);
+            userid_map.insert(*it);
             //color_map.insert(*it);
         }
 
         cout << "The r/place data set has been successfully loaded into memory!" << endl;
 
-    } else if(argv[1] == "-bplustree"){
+    } else if(argv[1] == (string)"-bplustree"){
 
         cout << "The r/place data set is being loaded into memory as a bplustree... (this might take a while)" << endl;
 
