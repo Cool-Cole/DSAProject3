@@ -29,7 +29,15 @@ public:
         keyType = key;
 
         nodeCount = 0;
-        bucketCount = 2000;
+
+        if(key == CORD){
+            bucketCount = 2000;
+        } else if(key == USERID){
+            bucketCount = 2000;
+        } else if(key == COLOR){
+            bucketCount = 16;
+        }
+
 
         buckets.resize(bucketCount);
     }
@@ -40,7 +48,7 @@ public:
         if(keyType == CORD){
             buckets.at(hash(temp->pixelX, temp->pixelY)).push_back(temp);
         } else if(keyType == USERID) {
-
+            buckets.at(hash(temp->userID)).push_back(temp);
         } else if(keyType == COLOR) {
 
         }
@@ -48,11 +56,19 @@ public:
     }
 
     unsigned int hash(unsigned int x, unsigned int y){
-        return x ^ y;
+        return (x ^ y) % bucketCount;
     }
 
     unsigned int hash(string userID){
-        return 0;
+
+        unsigned int hash = 0;
+
+        int temp = userID.size();
+        for(int i = 0; i < temp; i++){
+            hash += ((int)userID.at(i) << 3);
+        }
+
+        return hash % bucketCount;
     }
 
     unsigned int hashColor(string color){
