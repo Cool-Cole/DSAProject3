@@ -37,6 +37,10 @@ int main(int argc, char **argv) {
 
         Hashmap map;
 
+        for(auto it = rawPixelData.begin(); it != rawPixelData.end(); it++){
+            map.insert(*it);
+        }
+
         cout << "The r/place data set has been successfully loaded into memory!" << endl;
 
     } else if(argv[1] == "-bplustree"){
