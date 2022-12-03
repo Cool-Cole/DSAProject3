@@ -2,8 +2,6 @@
 // Created by Chase Hap on 11/2/22.
 //
 
-//temp
-
 using namespace std;
 
 #ifndef DSAPROJECT3_PIXELUPDATE_H

@@ -14,6 +14,10 @@ using namespace std;
 
 enum flag {CORD, USERID, COLOR};
 
+int getColorCountHashmap(string color){
+
+}
+
 class Hashmap {
 
     unsigned int nodeCount;

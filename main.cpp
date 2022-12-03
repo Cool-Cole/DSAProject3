@@ -4,8 +4,6 @@
 #include "bplustree.h"
 #include "hashmap.h"
 
-//temp
-
 using namespace std;
 
 int main(int argc, char **argv) {
@@ -23,17 +21,6 @@ int main(int argc, char **argv) {
     pixelUpdateLoader(rawPixelData, argv[2]); // Load the file information into the rawPixelData array
 
     cout << "The r/place data set has been successfully loaded into memory!" << endl;
-
-    /*
-
-     VERY VERY IMPORTANT NOTE!!!
-
-     For the sake of performance please don't copy pixel objects into new pixel objects
-     Just take the pointers and shove them into whatever data structure you are using
-
-     If I see the pixelUpdate copy constructor being used unironically I will murder whoever wrote that code
-
-     */
 
 
     if(argv[1] == (string)"-hashmap"){
@@ -56,7 +43,6 @@ int main(int argc, char **argv) {
 
         cout << "The r/place data set is being loaded into memory as a B+ Tree... (this might take a while)" << endl;
 
-        // TODO set up bplustree
         bplusTree userid_tree;
         bplusTree color_tree;
         bplusTree coordinate_tree;
