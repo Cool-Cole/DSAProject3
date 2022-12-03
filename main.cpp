@@ -9,6 +9,8 @@ using namespace std;
 
 int main(int argc, char **argv) {
 
+    int a;
+
     // Sanity check to ensure that the user isn't just running this binary without arguments
     if(argc < 3){
         cout << "Please ensure that you are running ./project3 -hashmap data.csv or ./project3 -bplustree data.csv." << endl;
@@ -35,10 +37,14 @@ int main(int argc, char **argv) {
 
         cout << "The r/place data set is being loaded into memory as a hashmap... (this might take a while)" << endl;
 
-        Hashmap map;
+        Hashmap cord_map(CORD);
+        Hashmap userid_map(USERID);
+        Hashmap color_map(COLOR);
 
         for(auto it = rawPixelData.begin(); it != rawPixelData.end(); it++){
-            map.insert(*it);
+            cord_map.insert(*it);
+            //userid_map.insert(*it);
+            //color_map.insert(*it);
         }
 
         cout << "The r/place data set has been successfully loaded into memory!" << endl;
