@@ -2,8 +2,9 @@ cmake_minimum_required(VERSION 3.21.0)
 project(DSAProject3)
 
 # These options will make our program run way faster
-add_compile_options(-O3)
-add_compile_options(-march=native)
+# Leaving these commented out for now because it makes debugging harder
+#add_compile_options(-O3)
+#add_compile_options(-march=native)
 
 set(CMAKE_CXX_STANDARD 17)
 
