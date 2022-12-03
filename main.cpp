@@ -16,9 +16,13 @@ int main(int argc, char **argv) {
         return 0;
     }
 
+    cout << "Loading the r/place data set into memory... (this might take a while)" << endl;
+
     vector<pixelUpdate*> rawPixelData;
 
     pixelUpdateLoader(rawPixelData, argv[2]); // Load the file information into the rawPixelData array
+
+    cout << "The r/place data set has been successfully loaded into memory!" << endl;
 
     /*
 
@@ -34,7 +38,7 @@ int main(int argc, char **argv) {
 
     if(argv[1] == (string)"-hashmap"){
 
-        cout << "The r/place data set is being loaded into memory as a hashmap... (this might take a while)" << endl;
+        cout << "The r/place data set is being loaded into memory as a hashmap..." << endl;
 
         Hashmap cord_map(CORD);
         Hashmap userid_map(USERID);
@@ -46,11 +50,11 @@ int main(int argc, char **argv) {
             color_map.insert(*it);
         }
 
-        cout << "The r/place data set has been successfully loaded into memory!" << endl;
+        cout << "The r/place data set has been successfully loaded as a hashmap!" << endl;
 
     } else if(argv[1] == (string)"-bplustree"){
 
-        cout << "The r/place data set is being loaded into memory as a bplustree... (this might take a while)" << endl;
+        cout << "The r/place data set is being loaded into memory as a B+ Tree... (this might take a while)" << endl;
 
         // TODO set up bplustree
         bplusTree userid_tree;
@@ -62,7 +66,7 @@ int main(int argc, char **argv) {
             coordinate_tree.insertCoordinates(*it);
         }
 
-        cout << "The r/place data set has been successfully loaded into memory!" << endl;
+        cout << "The r/place data set has been successfully loaded as a B+ Tree!" << endl;
     }
 
 
