@@ -12,6 +12,14 @@ using namespace std;
 class pixelUpdate{
 public:
 
+    void printPixelUpdate(){
+        cout << "Date and Time: " << dateTime << endl;
+        cout << "Time since start: " << timeSinceStart << " seconds" << endl;
+        cout << "UserID responsible: " << userID << endl;
+        cout << "Color: " << color << endl;
+        cout << "Coordinates: " << coords << endl << endl;
+    }
+
     //Primary Constructor
     pixelUpdate(string dateTime, unsigned int timeSinceStart, string userID, string color, int pixelX, int pixelY, string coords){
         this->dateTime = dateTime;

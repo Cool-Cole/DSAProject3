@@ -47,6 +47,31 @@ public:
         buckets.resize(bucketCount);
     }
 
+    pixelUpdate *getUserFirst(string userID){
+        if(keyType != USERID)
+            return nullptr;
+        unsigned int userHash = hash(userID);
+
+        for(auto iter : buckets.at(userHash)){
+            if(iter->userID == userID)
+                return iter;
+        }
+    }
+
+    pixelUpdate *getUserLast(string userID){
+        if(keyType != USERID)
+            return nullptr;
+        unsigned int userHash = hash(userID);
+
+        pixelUpdate *tmp = nullptr;
+        for(auto iter : buckets.at(userHash)){
+            if(iter->userID == userID)
+                tmp = iter;
+        }
+
+        return tmp;
+    }
+
     void insert(pixelUpdate* temp){
         nodeCount++;
 

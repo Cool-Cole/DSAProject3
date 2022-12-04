@@ -22,14 +22,23 @@ int main(int argc, char **argv) {
 
     cout << "The r/place data set has been successfully loaded into memory!" << endl;
 
+    //Hashmaps and trees declared outside of if statements so that they persist through the menu.
+    Hashmap cord_map(CORD);
+    Hashmap userid_map(USERID);
+    Hashmap color_map(COLOR);
+
+    bplusTree userid_tree;
+    bplusTree color_tree;
+    bplusTree coordinate_tree;
+
+    //This bool indicates what data type has been loaded.
+    bool dataTypeHash = false;
 
     if(argv[1] == (string)"-hashmap"){
 
-        cout << "The r/place data set is being loaded into memory as a hashmap..." << endl;
+        dataTypeHash = true;
 
-        Hashmap cord_map(CORD);
-        Hashmap userid_map(USERID);
-        Hashmap color_map(COLOR);
+        cout << "The r/place data set is being loaded into memory as a hashmap..." << endl;
 
         for(auto it = rawPixelData.begin(); it != rawPixelData.end(); it++){
             cord_map.insert(*it);
@@ -42,10 +51,6 @@ int main(int argc, char **argv) {
     } else if(argv[1] == (string)"-bplustree"){
 
         cout << "The r/place data set is being loaded into memory as a B+ Tree... (this might take a while)" << endl;
-
-        bplusTree userid_tree;
-        bplusTree color_tree;
-        bplusTree coordinate_tree;
         for(auto it = rawPixelData.begin(); it != rawPixelData.end(); it++){
             userid_tree.insertID(*it);
             color_tree.insertColor(*it);
@@ -65,9 +70,50 @@ int main(int argc, char **argv) {
         cout << "Enter number: " << endl;
 
         cin >> userChoice;
+        string searchUserID;
+        pixelUpdate *returnedPixelUpdate;
 
         switch (userChoice) {
-            case 1:
+            case 1: //When the user is providing a userID to search
+                cout << "1. Get first pixel edit (coordinates and color)" << endl;
+                cout << "2. Get last pixel edit (coordinates and color)" << endl;
+                cout << "3. Get number of pixels edited" << endl;
+                cout << "4. Print all edits made by this user" << endl;
+                cout << "5. Go back" << endl;
+
+                cin >> userChoice;
+                switch(userChoice){
+                    case 1:
+                        cout << "Please enter the userID" << endl;
+                        cin >> searchUserID;
+
+                        if(dataTypeHash){
+                            returnedPixelUpdate = userid_map.getUserFirst(searchUserID);
+                        }
+                        else{
+                            returnedPixelUpdate = nullptr; //PLACEHOLDER
+                        }
+
+                        if(returnedPixelUpdate == nullptr)
+                            cout << "No results found" << endl;
+                        else{
+                            returnedPixelUpdate->printPixelUpdate();
+                        }
+
+                        break;
+                    case 2:
+                        cout << "Please enter the userID" << endl;
+                        break;
+                    case 3:
+                        cout << "Please enter the userID" << endl;
+                        break;
+                    case 4:
+                        cout << "Please enter the userID" << endl;
+                        break;
+                    default:
+                        break;
+                }
+
                 break;
             case 2:
                 break;
