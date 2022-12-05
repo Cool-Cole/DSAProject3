@@ -87,6 +87,10 @@ public:
         return result;
     }
 
+    unsigned int getColorCount(string color){
+        return buckets.at(hashColor(color)).size();
+    }
+
     void insert(pixelUpdate* temp){
         nodeCount++;
 
