@@ -56,6 +56,7 @@ public:
             if(iter->userID == userID)
                 return iter;
         }
+        return nullptr;
     }
 
     pixelUpdate *getUserLast(string userID){
@@ -70,6 +71,20 @@ public:
         }
 
         return tmp;
+    }
+
+    vector<pixelUpdate> *getUserAll(string userID){
+        if(keyType != USERID)
+            return nullptr;
+        unsigned int userHash = hash(userID);
+
+        vector<pixelUpdate> *result = new vector<pixelUpdate>;
+
+        for(auto iter : buckets.at(userHash)){
+            if(iter->userID == userID)
+                result->push_back(iter);
+        }
+        return result;
     }
 
     void insert(pixelUpdate* temp){

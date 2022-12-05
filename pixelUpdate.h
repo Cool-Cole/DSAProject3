@@ -17,7 +17,7 @@ public:
         cout << "Time since start: " << timeSinceStart << " seconds" << endl;
         cout << "UserID responsible: " << userID << endl;
         cout << "Color: " << color << endl;
-        cout << "Coordinates: " << coords << endl << endl;
+        cout << "Coordinates: " << pixelX << ", " << pixelY << endl << endl;
     }
 
     //Primary Constructor

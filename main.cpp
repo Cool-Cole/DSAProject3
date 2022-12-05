@@ -1,5 +1,4 @@
 #include <iostream>
-#include <fstream>
 #include "CSVparse.h"
 #include "bplustree.h"
 #include "hashmap.h"
@@ -72,6 +71,7 @@ int main(int argc, char **argv) {
         cin >> userChoice;
         string searchUserID;
         pixelUpdate *returnedPixelUpdate;
+        vector<pixelUpdate> *returnedPixelUpdateList;
 
         switch (userChoice) {
             case 1: //When the user is providing a userID to search
@@ -82,36 +82,57 @@ int main(int argc, char **argv) {
                 cout << "5. Go back" << endl;
 
                 cin >> userChoice;
-                switch(userChoice){
-                    case 1:
-                        cout << "Please enter the userID" << endl;
-                        cin >> searchUserID;
+                if (userChoice == 1) {
+                    cout << "Please enter the userID" << endl;
+                    cin >> searchUserID;
 
-                        if(dataTypeHash){
-                            returnedPixelUpdate = userid_map.getUserFirst(searchUserID);
-                        }
-                        else{
-                            returnedPixelUpdate = nullptr; //PLACEHOLDER
-                        }
+                    if (dataTypeHash) {
+                        returnedPixelUpdate = userid_map.getUserFirst(searchUserID);
+                    } else {
+                        returnedPixelUpdate = nullptr; //PLACEHOLDER
+                    }
 
-                        if(returnedPixelUpdate == nullptr)
-                            cout << "No results found" << endl;
-                        else{
-                            returnedPixelUpdate->printPixelUpdate();
-                        }
+                    if (returnedPixelUpdate == nullptr)
+                        cout << "No results found" << endl;
+                    else
+                        returnedPixelUpdate->printPixelUpdate();
+                }
+                else if(userChoice == 2){
+                    cout << "Please enter the userID" << endl;
+                    cin >> searchUserID;
 
-                        break;
-                    case 2:
-                        cout << "Please enter the userID" << endl;
-                        break;
-                    case 3:
-                        cout << "Please enter the userID" << endl;
-                        break;
-                    case 4:
-                        cout << "Please enter the userID" << endl;
-                        break;
-                    default:
-                        break;
+                    if(dataTypeHash){
+                        returnedPixelUpdate = userid_map.getUserLast(searchUserID);
+                    }
+                    else{
+                        returnedPixelUpdate = nullptr; //PLACEHOLDER
+                    }
+
+                    if(returnedPixelUpdate == nullptr)
+                        cout << "No results found" << endl;
+                    else
+                        returnedPixelUpdate->printPixelUpdate();
+                }
+
+                else if(userChoice == 3){}
+
+                else if(userChoice == 4) {
+                    cout << "Please enter the userID" << endl;
+                    cin >> searchUserID;
+
+                    if (dataTypeHash) {
+                        returnedPixelUpdateList = userid_map.getUserAll(searchUserID);
+                    } else {
+                        returnedPixelUpdate = nullptr; //PLACEHOLDER
+                    }
+
+                    if (returnedPixelUpdate == nullptr)
+                        cout << "No results found" << endl;
+                    else {
+
+                        for (auto iter: *returnedPixelUpdateList)
+                            iter.printPixelUpdate();
+                    }
                 }
 
                 break;
@@ -124,8 +145,5 @@ int main(int argc, char **argv) {
                 return 0;
         }
     }
-
-
-    return 0;
 }
 
