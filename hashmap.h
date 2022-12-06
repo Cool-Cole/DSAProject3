@@ -69,12 +69,12 @@ public:
         return tmp;
     }
 
-    vector<pixelUpdate> *getUserAll(string userID){
+    vector<pixelUpdate*> *getUserAll(string userID){
         if(keyType != USERID)
             return nullptr;
         unsigned int userHash = hash(userID);
 
-        vector<pixelUpdate> *result = new vector<pixelUpdate>;
+        vector<pixelUpdate*> *result = new vector<pixelUpdate*>;
 
         for(auto iter : buckets.at(userHash)){
             if(iter->userID == userID)
@@ -117,6 +117,61 @@ public:
     /*unsigned int hash(unsigned int x, unsigned int y){
         return (x ^ (y << 1)) % bucketCount;
     }*/
+
+    vector<pixelUpdate*> *getPixelCoordAll(string pixelCoord){
+        if(keyType != CORD)
+            return nullptr;
+        vector<pixelUpdate*> *result = new vector<pixelUpdate*>;
+
+        unsigned int coordHash = hash(pixelCoord);
+
+        for(auto iter : buckets.at(coordHash)){
+            if(iter->coords == pixelCoord)
+                result->push_back(iter);
+        }
+        return result;
+    }
+
+    unsigned int getPixelCoordCount(string pixelCoord){
+        if(keyType != CORD)
+            return -1;
+        unsigned int result = 0;
+
+        unsigned int coordHash = hash(pixelCoord);
+
+        for(auto iter : buckets.at(coordHash)){
+            if(iter->coords == pixelCoord)
+                result++;
+        }
+        return result;
+    }
+
+    pixelUpdate *getPixelCoordFirst(string pixelCoord){
+        if(keyType != CORD)
+            return nullptr;
+
+        unsigned int coordHash = hash(pixelCoord);
+
+        for(auto iter : buckets.at(coordHash)){
+            if(iter->coords == pixelCoord)
+                return iter;
+        }
+        return nullptr;
+    }
+
+    pixelUpdate *getPixelCoordLast(string pixelCoord){
+        if(keyType != CORD)
+            return nullptr;
+
+        unsigned int coordHash = hash(pixelCoord);
+
+        pixelUpdate *tmp = nullptr;
+        for(auto iter : buckets.at(coordHash)){
+            if(iter->coords == pixelCoord)
+                tmp = iter;
+        }
+        return tmp;
+    }
 
     unsigned int hash(string userID){
 

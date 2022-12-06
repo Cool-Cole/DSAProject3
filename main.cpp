@@ -64,7 +64,7 @@ int main(int argc, char **argv) {
         cin >> userChoice;
         string searchUserID;
         pixelUpdate *returnedPixelUpdate;
-        vector<pixelUpdate> *returnedPixelUpdateList;
+        vector<pixelUpdate*> *returnedPixelUpdateList;
 
         switch (userChoice) {
             case 1: //When the user is providing a userID to search
@@ -116,11 +116,10 @@ int main(int argc, char **argv) {
                     else {
 
                         for (auto iter: *returnedPixelUpdateList)
-                            iter.printPixelUpdate();
+                            iter->printPixelUpdate();
                     }
                 }
-                else
-                    break;
+                break;
             case 2:
                 cout << "1. Get first edit to this pixel" << endl;
                 cout << "2. Get last edit to this pixel" << endl;
@@ -129,12 +128,50 @@ int main(int argc, char **argv) {
                 cout << "5. Go back" << endl;
 
                 cin >> userChoice;
+                if(userChoice == 1){
+                    cout << "Enter pixel coordinate:" << endl;
+                    cin >> userString;
 
-                cout << "Enter pixel coordinate:" << endl;
-                cin >> userString;
+                    returnedPixelUpdate = cord_map.getPixelCoordFirst(userString);
 
+                    if (returnedPixelUpdate == nullptr)
+                        cout << "No results found" << endl;
+                    else
+                        returnedPixelUpdate->printPixelUpdate();
+                }
+                else if(userChoice == 2){
+                    cout << "Enter pixel coordinate:" << endl;
+                    cin >> userString;
 
+                    returnedPixelUpdate = cord_map.getPixelCoordLast(userString);
 
+                    if (returnedPixelUpdate == nullptr)
+                        cout << "No results found" << endl;
+                    else
+                        returnedPixelUpdate->printPixelUpdate();
+                }
+                else if(userChoice == 3){
+                    cout << "Enter pixel coordinate:" << endl;
+                    cin >> userString;
+
+                    unsigned int result = cord_map.getPixelCoordCount(userString);
+
+                    cout << result << endl;
+                }
+                else if(userChoice == 4){
+                    cout << "Enter pixel coordinate:" << endl;
+                    cin >> userString;
+
+                    returnedPixelUpdateList = cord_map.getPixelCoordAll(userString);
+
+                    if (returnedPixelUpdateList->size() == 0)
+                        cout << "No results found" << endl;
+                    else {
+
+                        for (auto iter: *returnedPixelUpdateList)
+                            iter->printPixelUpdate();
+                    }
+                }
                 break;
             case 3:
 
