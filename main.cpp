@@ -120,6 +120,8 @@ int main(int argc, char **argv) {
                 cout << "Enter pixel coordinate:" << endl;
                 cin >> userString;
 
+
+
                 break;
             case 3:
 
