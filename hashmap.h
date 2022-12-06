@@ -106,16 +106,15 @@ public:
 
     unsigned int hash(string userID){
 
-        /*unsigned int hash = 0;
+        unsigned int hash = 0x55555555;;
 
         int temp = userID.size();
         for(int i = 0; i < temp; i++){
-            hash += ((int)userID.at(i) << 3);
-        }*/
+            hash ^= userID.at(i);
+            hash = hash << 5;
+        }
 
-        unsigned int hasher = hash(userID);
-
-        return hasher % bucketCount;
+        return hash % bucketCount;
     }
 
     unsigned int hashColor(string color){
