@@ -231,11 +231,12 @@ public:
 
     unsigned int hash(string userID){
 
-        int hash = 0;;
+        int hash = 0;
 
         int temp = userID.size();
+
         for(int i = 0; i < temp; i++){
-            hash = 37*hash+userID.at(i);
+            hash = 0x25*hash+userID.at(i);
         }
 
         if(hash < 0){
