@@ -73,10 +73,13 @@ void bplusTree::insertID(pixelUpdate* pixel) {
     if (root == nullptr) {
         //initialize data nodes
         root = new Node(pixel, maxLeaves);
+        root->pixelData = pixel;
         root->isLeaf = true;
         root->nodeSize = 1;
         root->hashKey.at(0) = inputHashData;
         root->hashKey.at(0).pixel = pixel;
+
+
     }
     else {
         Node* nodePtr = root;
@@ -101,6 +104,7 @@ void bplusTree::insertID(pixelUpdate* pixel) {
             if (nodePtr->isLeaf) {
                 //handle split node
                 Node *splitNode = new Node(pixel, maxLeaves);
+                splitNode->pixelData = pixel;
                 int splitIndex = maxLeaves / 2;
                 splitNode->nodeSize = nodePtr->nodeSize - splitIndex;
                 for (int i = splitIndex, j = 0; i < nodePtr->nodeSize; i++, j++) {
@@ -114,6 +118,7 @@ void bplusTree::insertID(pixelUpdate* pixel) {
                 // handles parent
                 if (nodePtr->parentNodePtr == nullptr) {
                     Node *newParent = new Node(maxLeaves);
+                    newParent->pixelData = pixel;
                     newParent->hashKey.at(0) = splitNode->hashKey.at(0);
                     newParent->nodeSize = 1;
                     newParent->childPtr.at(0) = nodePtr;
@@ -129,6 +134,7 @@ void bplusTree::insertID(pixelUpdate* pixel) {
                 // else split non leaf node
             else {
                 Node *splitNode = new Node(maxLeaves);
+                splitNode->pixelData = pixel;
                 int splitIndex = (maxLeaves - 1) / 2;
                 splitNode->nodeSize = nodePtr->nodeSize - splitIndex - 1;
                 for (int i = splitIndex + 1, j = 0; i < nodePtr->nodeSize; i++, j++) {
@@ -142,6 +148,7 @@ void bplusTree::insertID(pixelUpdate* pixel) {
                 // handles parent
                 if (nodePtr->parentNodePtr == nullptr) {
                     Node *newParent = new Node(maxLeaves);
+                    newParent->pixelData = pixel;
                     newParent->hashKey.at(0) = nodePtr->hashKey.at(splitIndex);
                     newParent->nodeSize = 1;
                     newParent->childPtr.at(0) = nodePtr;
@@ -198,6 +205,7 @@ void bplusTree::insertColor(pixelUpdate* pixel) {
     if (root == nullptr) {
         //initialize data nodes
         root = new Node(pixel, maxLeaves);
+        root->pixelData = pixel;
         root->isLeaf = true;
         root->nodeSize = 1;
         root->hashKey.at(0) = inputHashData;
@@ -227,6 +235,7 @@ void bplusTree::insertColor(pixelUpdate* pixel) {
             if (nodePtr->isLeaf) {
                 //handle split node
                 Node *splitNode = new Node(pixel, maxLeaves);
+                splitNode->pixelData = pixel;
                 int splitIndex = maxLeaves / 2;
                 splitNode->nodeSize = nodePtr->nodeSize - splitIndex;
                 for (int i = splitIndex, j = 0; i < nodePtr->nodeSize; i++, j++) {
@@ -240,6 +249,7 @@ void bplusTree::insertColor(pixelUpdate* pixel) {
                 // handles parent
                 if (nodePtr->parentNodePtr == nullptr) {
                     Node *newParent = new Node(maxLeaves);
+                    newParent->pixelData = pixel;
                     newParent->hashKey.at(0) = splitNode->hashKey.at(0);
                     newParent->nodeSize = 1;
                     newParent->childPtr.at(0) = nodePtr;
@@ -255,6 +265,7 @@ void bplusTree::insertColor(pixelUpdate* pixel) {
                 // else split non leaf node
             else {
                 Node *splitNode = new Node(maxLeaves);
+                splitNode->pixelData = pixel;
                 int splitIndex = (maxLeaves - 1) / 2;
                 splitNode->nodeSize = nodePtr->nodeSize - splitIndex - 1;
                 for (int i = splitIndex + 1, j = 0; i < nodePtr->nodeSize; i++, j++) {
@@ -268,6 +279,7 @@ void bplusTree::insertColor(pixelUpdate* pixel) {
                 // handles parent
                 if (nodePtr->parentNodePtr == nullptr) {
                     Node *newParent = new Node(maxLeaves);
+                    newParent->pixelData = pixel;
                     newParent->hashKey.at(0) = nodePtr->hashKey.at(splitIndex);
                     newParent->nodeSize = 1;
                     newParent->childPtr.at(0) = nodePtr;
@@ -296,6 +308,7 @@ void bplusTree::insertCoordinates(pixelUpdate* pixel) {
     if (root == nullptr) {
         //initialize data nodes
         root = new Node(pixel, maxLeaves);
+        root->pixelData = pixel;
         root->isLeaf = true;
         root->nodeSize = 1;
         root->hashKey.at(0) = inputHashData;
@@ -324,6 +337,7 @@ void bplusTree::insertCoordinates(pixelUpdate* pixel) {
             if (nodePtr->isLeaf) {
                 //handle split node
                 Node *splitNode = new Node(pixel, maxLeaves);
+                splitNode->pixelData = pixel;
                 int splitIndex = maxLeaves / 2;
                 splitNode->nodeSize = nodePtr->nodeSize - splitIndex;
                 for (int i = splitIndex, j = 0; i < nodePtr->nodeSize; i++, j++) {
@@ -337,6 +351,7 @@ void bplusTree::insertCoordinates(pixelUpdate* pixel) {
                 // handles parent
                 if (nodePtr->parentNodePtr == nullptr) {
                     Node *newParent = new Node(maxLeaves);
+                    newParent->pixelData = pixel;
                     newParent->hashKey.at(0) = splitNode->hashKey.at(0);
                     newParent->nodeSize = 1;
                     newParent->childPtr.at(0) = nodePtr;
@@ -352,6 +367,7 @@ void bplusTree::insertCoordinates(pixelUpdate* pixel) {
                 // else split non leaf node
             else {
                 Node *splitNode = new Node(maxLeaves);
+                splitNode->pixelData = pixel;
                 int splitIndex = (maxLeaves - 1) / 2;
                 splitNode->nodeSize = nodePtr->nodeSize - splitIndex - 1;
                 for (int i = splitIndex + 1, j = 0; i < nodePtr->nodeSize; i++, j++) {
@@ -365,6 +381,7 @@ void bplusTree::insertCoordinates(pixelUpdate* pixel) {
                 // handles parent
                 if (nodePtr->parentNodePtr == nullptr) {
                     Node *newParent = new Node(maxLeaves);
+                    newParent->pixelData = pixel;
                     newParent->hashKey.at(0) = nodePtr->hashKey.at(splitIndex);
                     newParent->nodeSize = 1;
                     newParent->childPtr.at(0) = nodePtr;
@@ -399,19 +416,22 @@ pixelUpdate* bplusTree::search(string searchData) {;
             }
         }
     }
-    for (int i = 0; i < nodePtr->nodeSize; i++) {
+
+    return nodePtr->pixelData;
+
+    /*for (int i = 0; i < nodePtr->nodeSize; i++) {
         if(nodePtr->hashKey.at(i) == searchHashData){
             return nodePtr->hashKey.at(i).pixel; // added this here so that we can look at what it finds
-            //found = true;
-            //break;
         }
-    }/*
+    }*/
+
+     /*
     if(found){
         cout << "User ID found " << endl;
     }
     else{
         cout << "No ID found" << endl;
     }*/
-    return nullptr;
+    //return nullptr;
 }
 #endif //DSAPROJECT3_BPLUSTREE_H
