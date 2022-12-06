@@ -174,18 +174,57 @@ int main(int argc, char **argv) {
                 }
                 break;
             case 3:
+                cout << "1. Get first edit of this color" << endl;
+                cout << "2. Get last edit to this color" << endl;
+                cout << "3. Get number of edits using this color" << endl;
+                cout << "4. Print all edits using this color" << endl;
+                cout << "5. Go back" << endl;
 
-                cout << "Enter color: " << endl;
-                cin >> userString;
+                cin >> userChoice;
+                if(userChoice == 1){
+                    cout << "Enter color:" << endl;
+                    cin >> userString;
 
-                cout << endl << "This color was placed " << color_map.getBucketSize(userString) << " times." << endl;
+                    returnedPixelUpdate = color_map.getPixelColorFirst(userString);
 
-                cout << endl << "The first user to place this color was: " << endl;
+                    if (returnedPixelUpdate == nullptr)
+                        cout << "No results found" << endl;
+                    else
+                        returnedPixelUpdate->printPixelUpdate();
+                }
+                else if(userChoice == 2){
+                    cout << "Enter color:" << endl;
+                    cin >> userString;
 
-                returnedPixelUpdate = color_tree.search(userString);
+                    returnedPixelUpdate = cord_map.getPixelColorLast(userString);
 
-                returnedPixelUpdate->printPixelUpdate();
+                    if (returnedPixelUpdate == nullptr)
+                        cout << "No results found" << endl;
+                    else
+                        returnedPixelUpdate->printPixelUpdate();
+                }
+                else if(userChoice == 3){
+                    cout << "Enter color:" << endl;
+                    cin >> userString;
 
+                    unsigned int result = cord_map.getPixelColorCount(userString);
+
+                    cout << "The pixel at " << userString << " has been updated " << result << " times."<< endl;
+                }
+                else if(userChoice == 4){
+                    cout << "Enter color:" << endl;
+                    cin >> userString;
+
+                    returnedPixelUpdateList = cord_map.getPixelColorAll(userString);
+
+                    if (returnedPixelUpdateList->size() == 0)
+                        cout << "No results found" << endl;
+                    else {
+
+                        for (auto iter: *returnedPixelUpdateList)
+                            iter->printPixelUpdate();
+                    }
+                }
                 break;
             case 4:
                 cout << "Quitting..." << endl;

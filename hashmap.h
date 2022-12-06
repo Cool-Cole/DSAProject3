@@ -173,6 +173,62 @@ public:
         return tmp;
     }
 
+    pixelUpdate *getPixelColorFirst(string pixelColor){
+        if(keyType != COLOR)
+            return nullptr;
+
+        unsigned int coordHash = hash(pixelColor);
+
+        for(auto iter : buckets.at(coordHash)){
+            if(iter->color == pixelColor)
+                return iter;
+        }
+        return nullptr;
+    }
+
+    pixelUpdate *getPixelColorLast(string pixelColor){
+        if(keyType != COLOR)
+            return nullptr;
+
+        unsigned int coordHash = hash(pixelColor);
+
+        pixelUpdate *tmp = nullptr;
+
+        for(auto iter : buckets.at(coordHash)){
+            if(iter->color == pixelColor)
+                tmp = iter;
+        }
+        return tmp;
+    }
+
+    unsigned int getPixelColorCount(string pixelColor){
+        if(keyType != COLOR)
+            return -1;
+        unsigned int result = 0;
+
+        unsigned int coordHash = hash(pixelColor);
+
+        for(auto iter : buckets.at(coordHash)){
+            if(iter->coords == pixelColor)
+                result++;
+        }
+        return result;
+    }
+
+    vector<pixelUpdate*> *getPixelColorAll(string pixelColor){
+        if(keyType != COLOR)
+            return nullptr;
+        vector<pixelUpdate*> *result = new vector<pixelUpdate*>;
+
+        unsigned int coordHash = hash(pixelColor);
+
+        for(auto iter : buckets.at(coordHash)){
+            if(iter->color == pixelColor)
+                result->push_back(iter);
+        }
+        return result;
+    }
+
     unsigned int hash(string userID){
 
         int hash = 0;;
