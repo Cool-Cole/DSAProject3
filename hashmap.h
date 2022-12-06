@@ -83,6 +83,20 @@ public:
         return result;
     }
 
+    unsigned int getUserCount(string userID){
+        if(keyType != USERID)
+            return -1;
+        unsigned int userHash = hash(userID);
+
+        unsigned int result = 0;
+
+        for(auto iter : buckets.at(userHash)){
+            if(iter->userID == userID)
+                result++;
+        }
+        return result;
+    }
+
     unsigned int getColorCount(string color){
         return buckets.at(hashColor(color)).size();
     }

@@ -98,7 +98,12 @@ int main(int argc, char **argv) {
                         returnedPixelUpdate->printPixelUpdate();
                 }
 
-                else if(userChoice == 3){}
+                else if(userChoice == 3){
+                    cout << "Please enter the userID" << endl;
+                    cin >> searchUserID;
+
+                    cout << "Pixel updates by user " << searchUserID << ": " << userid_map.getUserCount(searchUserID) << endl;
+                }
 
                 else if(userChoice == 4) {
                     cout << "Please enter the userID" << endl;
@@ -106,7 +111,7 @@ int main(int argc, char **argv) {
 
                     returnedPixelUpdateList = userid_map.getUserAll(searchUserID);
 
-                    if (returnedPixelUpdate == nullptr)
+                    if (returnedPixelUpdateList->size() == 0)
                         cout << "No results found" << endl;
                     else {
 
@@ -114,9 +119,17 @@ int main(int argc, char **argv) {
                             iter.printPixelUpdate();
                     }
                 }
-
-                break;
+                else
+                    break;
             case 2:
+                cout << "1. Get first edit to this pixel" << endl;
+                cout << "2. Get last edit to this pixel" << endl;
+                cout << "3. Get number of edits to this pixel" << endl;
+                cout << "4. Print all edits made to this pixel" << endl;
+                cout << "5. Go back" << endl;
+
+                cin >> userChoice;
+
                 cout << "Enter pixel coordinate:" << endl;
                 cin >> userString;
 
@@ -141,4 +154,3 @@ int main(int argc, char **argv) {
         }
     }
 }
-

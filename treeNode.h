@@ -48,7 +48,7 @@ public:
         childPtr.resize(maxLeaves+2);
         //isLeaf = true;
         for(int i=0; i<childPtr.size(); i++){
-            childPtr.at(i) == nullptr;
+            childPtr.at(i) = nullptr;
         }
         parentNodePtr = nullptr;
         nextLeafPtr = nullptr;
