@@ -117,6 +117,8 @@ int main(int argc, char **argv) {
 
                 break;
             case 2:
+                cout << "Enter pixel coordinate " <<
+
                 break;
             case 3:
 
