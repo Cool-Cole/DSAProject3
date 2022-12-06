@@ -397,16 +397,16 @@ pixelUpdate* bplusTree::search(string searchData) {;
     for (int i = 0; i < nodePtr->nodeSize; i++) {
         if(nodePtr->hashKey.at(i) == searchHashData){
             return nodePtr->pixelData; // added this here so that we can look at what it finds
-            found = true;
-            break;
+            //found = true;
+            //break;
         }
-    }
+    }/*
     if(found){
         cout << "User ID found " << endl;
     }
     else{
         cout << "No ID found" << endl;
-    }
+    }*/
     return nullptr;
 }
 #endif //DSAPROJECT3_BPLUSTREE_H

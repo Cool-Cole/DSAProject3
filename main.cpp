@@ -85,6 +85,13 @@ int main(int argc, char **argv) {
                         cout << "No results found" << endl;
                     else
                         returnedPixelUpdate->printPixelUpdate();
+
+                    returnedPixelUpdate = userid_tree.search(searchUserID);
+
+                    if (returnedPixelUpdate == nullptr)
+                        cout << "No results found" << endl;
+                    else
+                        returnedPixelUpdate->printPixelUpdate();
                 }
                 else if(userChoice == 2){
                     cout << "Please enter the userID" << endl;
@@ -131,6 +138,13 @@ int main(int argc, char **argv) {
                     cin >> userString;
 
                     returnedPixelUpdate = cord_map.getPixelCoordFirst(userString);
+
+                    if (returnedPixelUpdate == nullptr)
+                        cout << "No results found" << endl;
+                    else
+                        returnedPixelUpdate->printPixelUpdate();
+
+                    returnedPixelUpdate = coordinate_tree.search(userString);
 
                     if (returnedPixelUpdate == nullptr)
                         cout << "No results found" << endl;
@@ -184,6 +198,13 @@ int main(int argc, char **argv) {
                     cin >> userString;
 
                     returnedPixelUpdate = color_map.getPixelColorFirst(userString);
+
+                    if (returnedPixelUpdate == nullptr)
+                        cout << "No results found" << endl;
+                    else
+                        returnedPixelUpdate->printPixelUpdate();
+
+                    returnedPixelUpdate = color_tree.search(userString);
 
                     if (returnedPixelUpdate == nullptr)
                         cout << "No results found" << endl;

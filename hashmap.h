@@ -177,7 +177,7 @@ public:
         if(keyType != COLOR)
             return nullptr;
 
-        unsigned int coordHash = hash(pixelColor);
+        unsigned int coordHash = hashColor(pixelColor);
 
         for(auto iter : buckets.at(coordHash)){
             if(iter->color == pixelColor)
@@ -190,7 +190,7 @@ public:
         if(keyType != COLOR)
             return nullptr;
 
-        unsigned int coordHash = hash(pixelColor);
+        unsigned int coordHash = hashColor(pixelColor);
 
         pixelUpdate *tmp = nullptr;
 
@@ -202,25 +202,25 @@ public:
     }
 
     unsigned int getPixelColorCount(string pixelColor){
-        if(keyType != COLOR)
-            return -1;
+        //if(keyType != COLOR)
+          //  return -1;
         unsigned int result = 0;
 
-        unsigned int coordHash = hash(pixelColor);
+        unsigned int coordHash = hashColor(pixelColor);
 
         for(auto iter : buckets.at(coordHash)){
-            if(iter->coords == pixelColor)
+            if(iter->color == pixelColor)
                 result++;
         }
         return result;
     }
 
     vector<pixelUpdate*> *getPixelColorAll(string pixelColor){
-        if(keyType != COLOR)
-            return nullptr;
+        //if(keyType != COLOR)
+          //  return nullptr;
         vector<pixelUpdate*> *result = new vector<pixelUpdate*>;
 
-        unsigned int coordHash = hash(pixelColor);
+        unsigned int coordHash = hashColor(pixelColor);
 
         for(auto iter : buckets.at(coordHash)){
             if(iter->color == pixelColor)
