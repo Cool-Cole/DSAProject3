@@ -105,7 +105,7 @@ public:
         nodeCount++;
 
         if(keyType == CORD){
-            buckets.at(hash(temp->pixelX, temp->pixelY)).push_back(temp);
+            buckets.at(hash(temp->coords)).push_back(temp);
         } else if(keyType == USERID) {
             buckets.at(hash(temp->userID)).push_back(temp);
         } else if(keyType == COLOR) {
@@ -114,9 +114,9 @@ public:
 
     }
 
-    unsigned int hash(unsigned int x, unsigned int y){
+    /*unsigned int hash(unsigned int x, unsigned int y){
         return (x ^ (y << 1)) % bucketCount;
-    }
+    }*/
 
     unsigned int hash(string userID){
 
