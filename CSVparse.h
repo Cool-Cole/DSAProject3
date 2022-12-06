@@ -6,6 +6,7 @@
 #define DSAPROJECT3_CSVPARSE_H
 
 #include <vector>
+#include <fstream>
 #include "pixelUpdate.h"
 
 using namespace std;
@@ -44,7 +45,7 @@ int timeInSecondsCalculator(string timeStr){
 }
 
 void pixelUpdateLoader(vector<pixelUpdate*> &pixelUpdatesRAW, const string &filename){
-    ifstream csv("../" + filename);
+    ifstream csv(((string)"../") + filename);
 
     string line;
 

@@ -139,6 +139,12 @@ int main(int argc, char **argv) {
             case 2:
                 break;
             case 3:
+
+                cout << "Enter color: " << endl;
+                cin >> userString;
+
+                cout << endl << "This color was placed " << color_map.getBucketSize(userString) << " times." << endl;
+
                 break;
             case 4:
                 cout << "Quitting..." << endl;

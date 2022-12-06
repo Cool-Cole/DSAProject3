@@ -14,10 +14,6 @@ using namespace std;
 
 enum flag {CORD, USERID, COLOR};
 
-int getColorCountHashmap(string color){
-
-}
-
 class Hashmap {
 
     unsigned int nodeCount;
@@ -99,7 +95,7 @@ public:
         } else if(keyType == USERID) {
             buckets.at(hash(temp->userID)).push_back(temp);
         } else if(keyType == COLOR) {
-            hashColor(temp->color);
+            buckets.at(hashColor(temp->color)).push_back(temp);
         }
 
     }
@@ -157,6 +153,15 @@ public:
             cout << "Unknown color: " + color << endl;
             exit(1);
         }
+    }
+
+    unsigned int getBucketSize(string key){
+        if(keyType == COLOR){
+            return buckets.at(hashColor(key)).size();
+        } else if(keyType == USERID || keyType == CORD){
+            return buckets.at(hash(key)).size();
+        }
+        return 0;
     }
 
 };
