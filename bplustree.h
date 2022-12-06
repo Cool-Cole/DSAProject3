@@ -398,7 +398,7 @@ void bplusTree::insertCoordinates(pixelUpdate* pixel) {
     }
 }
 
-pixelUpdate bplusTree::search(string searchData, string type) {;
+void bplusTree::search(string searchData, string type) {;
     bool found = false;
     Node* nodePtr = root;
     hash<string> hasher;
@@ -418,7 +418,17 @@ pixelUpdate bplusTree::search(string searchData, string type) {;
     }
 
     if(type == "coordinate"){
-        cout << "" << endl;
+        cout << "Time of First Edit: " << nodePtr->pixelData->dateTime << endl;
+        cout << "First Color: " << nodePtr->pixelData->color << endl;
+        cout << "First User to Edit: " << nodePtr->pixelData->userID << endl;
+    } else if (type == "color"){
+        cout << "Time of First Place: " << nodePtr->pixelData->dateTime << endl;
+        cout << "Coordinate it Was Placed: " << nodePtr->pixelData->coords << endl;
+        cout << "First User to Place: " << nodePtr->pixelData->userID << endl;
+    } else if (type == "userid"){
+        cout << "Time of First Place: " << nodePtr->pixelData->dateTime << endl;
+        cout << "Coordinate it Was Placed: " << nodePtr->pixelData->coords << endl;
+        cout << "Color First Placed: " << nodePtr->pixelData->color << endl;
     }
 
 }
