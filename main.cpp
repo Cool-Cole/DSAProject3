@@ -156,7 +156,7 @@ int main(int argc, char **argv) {
 
                     unsigned int result = cord_map.getPixelCoordCount(userString);
 
-                    cout << result << endl;
+                    cout << "The pixel at " << userString << " has been updated " << result << " times."<< endl;
                 }
                 else if(userChoice == 4){
                     cout << "Enter pixel coordinate:" << endl;
