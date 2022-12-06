@@ -417,6 +417,8 @@ void bplusTree::search(string searchData, string type) {;
         }
     }
 
+    cout << endl;
+
     if(type == "coordinate"){
         cout << "Time of First Edit: " << nodePtr->pixelData->dateTime << endl;
         cout << "First Color: " << nodePtr->pixelData->color << endl;
@@ -431,5 +433,6 @@ void bplusTree::search(string searchData, string type) {;
         cout << "Color First Placed: " << nodePtr->pixelData->color << endl;
     }
 
+    cout << endl;
 }
 #endif //DSAPROJECT3_BPLUSTREE_H
