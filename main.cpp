@@ -79,19 +79,7 @@ int main(int argc, char **argv) {
                     cout << "Please enter the userID" << endl;
                     cin >> searchUserID;
 
-                    returnedPixelUpdate = userid_map.getUserFirst(searchUserID);
-
-                    if (returnedPixelUpdate == nullptr)
-                        cout << "No results found" << endl;
-                    else
-                        returnedPixelUpdate->printPixelUpdate();
-
-                    returnedPixelUpdate = userid_tree.search(searchUserID);
-
-                    if (returnedPixelUpdate == nullptr)
-                        cout << "No results found" << endl;
-                    else
-                        returnedPixelUpdate->printPixelUpdate();
+                    userid_tree.search(searchUserID, "userid");
                 }
                 else if(userChoice == 2){
                     cout << "Please enter the userID" << endl;
@@ -137,19 +125,7 @@ int main(int argc, char **argv) {
                     cout << "Enter pixel coordinate:" << endl;
                     cin >> userString;
 
-                    returnedPixelUpdate = cord_map.getPixelCoordFirst(userString);
-
-                    if (returnedPixelUpdate == nullptr)
-                        cout << "No results found" << endl;
-                    else
-                        returnedPixelUpdate->printPixelUpdate();
-
-                    returnedPixelUpdate = coordinate_tree.search(userString);
-
-                    if (returnedPixelUpdate == nullptr)
-                        cout << "No results found" << endl;
-                    else
-                        returnedPixelUpdate->printPixelUpdate();
+                    coordinate_tree.search(userString, "coordinate");
                 }
                 else if(userChoice == 2){
                     cout << "Enter pixel coordinate:" << endl;
@@ -197,19 +173,7 @@ int main(int argc, char **argv) {
                     cout << "Enter color:" << endl;
                     cin >> userString;
 
-                    returnedPixelUpdate = color_map.getPixelColorFirst(userString);
-
-                    if (returnedPixelUpdate == nullptr)
-                        cout << "No results found" << endl;
-                    else
-                        returnedPixelUpdate->printPixelUpdate();
-
-                    returnedPixelUpdate = color_tree.search(userString);
-
-                    if (returnedPixelUpdate == nullptr)
-                        cout << "No results found" << endl;
-                    else
-                        returnedPixelUpdate->printPixelUpdate();
+                    color_tree.search(userString, "color");
                 }
                 else if(userChoice == 2){
                     cout << "Enter color:" << endl;
