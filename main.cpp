@@ -97,14 +97,12 @@ int main(int argc, char **argv) {
                     else
                         returnedPixelUpdate->printPixelUpdate();
                 }
-
                 else if(userChoice == 3){
                     cout << "Please enter the userID" << endl;
                     cin >> searchUserID;
 
                     cout << "Pixel updates by user " << searchUserID << ": " << userid_map.getUserCount(searchUserID) << endl;
                 }
-
                 else if(userChoice == 4) {
                     cout << "Please enter the userID" << endl;
                     cin >> searchUserID;
