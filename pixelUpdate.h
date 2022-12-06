@@ -14,7 +14,6 @@ public:
 
     void printPixelUpdate(string mod = ""){
         cout << "Date and Time: " << dateTime << endl;
-        cout << "Time since start: " << timeSinceStart << " seconds" << endl;
         if(mod != "userid")
             cout << "UserID responsible: " << userID << endl;
         if(mod != "color")

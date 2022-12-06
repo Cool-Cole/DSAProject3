@@ -420,17 +420,17 @@ void bplusTree::search(string searchData, string type) {;
     cout << endl;
 
     if(type == "coordinate"){
-        cout << "Time of First Edit: " << nodePtr->pixelData->dateTime << endl;
-        cout << "First Color: " << nodePtr->pixelData->color << endl;
-        cout << "First User to Edit: " << nodePtr->pixelData->userID << endl;
+        cout << "Date and Time: " << nodePtr->pixelData->dateTime << endl;
+        cout << "Color: " << nodePtr->pixelData->color << endl;
+        cout << "UserID responsible: " << nodePtr->pixelData->userID << endl;
     } else if (type == "color"){
-        cout << "Time of First Place: " << nodePtr->pixelData->dateTime << endl;
-        cout << "Coordinate it Was Placed: " << nodePtr->pixelData->coords << endl;
-        cout << "First User to Place: " << nodePtr->pixelData->userID << endl;
+        cout << "Date and Time: " << nodePtr->pixelData->dateTime << endl;
+        cout << "UserID responsible: " << nodePtr->pixelData->userID << endl;
+        cout << "Coordinates: " << nodePtr->pixelData->coords << endl;
     } else if (type == "userid"){
-        cout << "Time of First Place: " << nodePtr->pixelData->dateTime << endl;
-        cout << "Coordinate it Was Placed: " << nodePtr->pixelData->coords << endl;
-        cout << "Color First Placed: " << nodePtr->pixelData->color << endl;
+        cout << "Date and Time: " << nodePtr->pixelData->dateTime << endl;
+        cout << "Coordinates: " << nodePtr->pixelData->coords << endl;
+        cout << "Color: " << nodePtr->pixelData->color << endl;
     }
 
     cout << endl;
