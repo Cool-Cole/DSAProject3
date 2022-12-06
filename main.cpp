@@ -79,7 +79,13 @@ int main(int argc, char **argv) {
                     cout << "Please enter the userID" << endl;
                     cin >> searchUserID;
 
-                    userid_tree.search(searchUserID, "userid");
+                    returnedPixelUpdate = userid_tree.search(searchUserID, "userid");
+
+                    if (returnedPixelUpdate == nullptr)
+                        cout << "No results found" << endl;
+                    else
+                        returnedPixelUpdate->printPixelUpdate("coordinates");
+
                 }
                 else if(userChoice == 2){
                     cout << "Please enter the userID" << endl;
@@ -125,7 +131,12 @@ int main(int argc, char **argv) {
                     cout << "Enter pixel coordinate:" << endl;
                     cin >> userString;
 
-                    coordinate_tree.search(userString, "coordinate");
+                    returnedPixelUpdate = coordinate_tree.search(userString, "coordinate");
+
+                    if (returnedPixelUpdate == nullptr)
+                        cout << "No results found" << endl;
+                    else
+                        returnedPixelUpdate->printPixelUpdate("coordinates");
                 }
                 else if(userChoice == 2){
                     cout << "Enter pixel coordinate:" << endl;
@@ -173,7 +184,12 @@ int main(int argc, char **argv) {
                     cout << "Enter color:" << endl;
                     cin >> userString;
 
-                    color_tree.search(userString, "color");
+                    returnedPixelUpdate = color_tree.search(userString, "color");
+
+                    if (returnedPixelUpdate == nullptr)
+                        cout << "No results found" << endl;
+                    else
+                        returnedPixelUpdate->printPixelUpdate("color");
                 }
                 else if(userChoice == 2){
                     cout << "Enter color:" << endl;

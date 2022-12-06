@@ -28,7 +28,7 @@ public:
     void insertID(pixelUpdate* pixel);
     void insertColor(pixelUpdate* pixel);
     void insertCoordinates(pixelUpdate* pixel);
-    void search(string searchData, string type);
+    pixelUpdate* search(string searchData, string type);
     void printbplusTree(Node* root);
     Node* getRoot();
 };
@@ -398,7 +398,7 @@ void bplusTree::insertCoordinates(pixelUpdate* pixel) {
     }
 }
 
-void bplusTree::search(string searchData, string type) {;
+pixelUpdate* bplusTree::search(string searchData, string type) {;
     bool found = false;
     Node* nodePtr = root;
     hash<string> hasher;
@@ -417,22 +417,6 @@ void bplusTree::search(string searchData, string type) {;
         }
     }
 
-    cout << endl;
-
-    if(type == "coordinate"){
-        cout << "Date and Time: " << nodePtr->pixelData->dateTime << endl;
-        cout << "Color: " << nodePtr->pixelData->color << endl;
-        cout << "UserID responsible: " << nodePtr->pixelData->userID << endl;
-    } else if (type == "color"){
-        cout << "Date and Time: " << nodePtr->pixelData->dateTime << endl;
-        cout << "UserID responsible: " << nodePtr->pixelData->userID << endl;
-        cout << "Coordinates: " << nodePtr->pixelData->coords << endl;
-    } else if (type == "userid"){
-        cout << "Date and Time: " << nodePtr->pixelData->dateTime << endl;
-        cout << "Coordinates: " << nodePtr->pixelData->coords << endl;
-        cout << "Color: " << nodePtr->pixelData->color << endl;
-    }
-
-    cout << endl;
+    return nodePtr->pixelData;
 }
 #endif //DSAPROJECT3_BPLUSTREE_H
