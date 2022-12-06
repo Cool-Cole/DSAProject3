@@ -8,8 +8,8 @@ using namespace std;
 int main(int argc, char **argv) {
 
     // Sanity check to ensure that the user isn't just running this binary without arguments
-    if(argc < 3){
-        cout << "Please ensure that you are running ./project3 -hashmap data.csv or ./project3 -bplustree data.csv." << endl;
+    if(argc < 2){
+        cout << "Please ensure that you are running ./project3 data.csv" << endl;
         return 0;
     }
 
@@ -17,7 +17,9 @@ int main(int argc, char **argv) {
 
     vector<pixelUpdate*> rawPixelData;
 
-    pixelUpdateLoader(rawPixelData, argv[2]); // Load the file information into the rawPixelData array
+    pixelUpdateLoader(rawPixelData, argv[1]); // Load the file information into the rawPixelData array
+
+    vector<pixelUpdate*> copy = rawPixelData;
 
     cout << "The r/place data set has been successfully loaded into memory!" << endl;
 
@@ -30,34 +32,25 @@ int main(int argc, char **argv) {
     bplusTree color_tree;
     bplusTree coordinate_tree;
 
-    //This bool indicates what data type has been loaded.
-    bool dataTypeHash = false;
-
-    if(argv[1] == (string)"-hashmap"){
-
-        dataTypeHash = true;
-
-        cout << "The r/place data set is being loaded into memory as a hashmap..." << endl;
-
-        for(auto it = rawPixelData.begin(); it != rawPixelData.end(); it++){
-            cord_map.insert(*it);
-            userid_map.insert(*it);
-            color_map.insert(*it);
-        }
-
-        cout << "The r/place data set has been successfully loaded as a hashmap!" << endl;
-
-    } else if(argv[1] == (string)"-bplustree"){
-
-        cout << "The r/place data set is being loaded into memory as a B+ Tree... (this might take a while)" << endl;
-        for(auto it = rawPixelData.begin(); it != rawPixelData.end(); it++){
-            userid_tree.insertID(*it);
-            color_tree.insertColor(*it);
-            coordinate_tree.insertCoordinates(*it);
-        }
-
-        cout << "The r/place data set has been successfully loaded as a B+ Tree!" << endl;
+    cout << "The r/place data set is being loaded into memory as a B+ Tree... (this might take a while)" << endl;
+    for(auto it = copy.begin(); it != copy.end(); it++){
+        userid_tree.insertID(*it);
+        color_tree.insertColor(*it);
+        coordinate_tree.insertCoordinates(*it);
     }
+    cout << "The r/place data set has been successfully loaded as a B+ Tree!" << endl;
+
+    cout << "The r/place data set is being loaded into memory as a hashmap..." << endl;
+
+    for(auto it = rawPixelData.begin(); it != rawPixelData.end(); it++){
+        cord_map.insert(*it);
+        userid_map.insert(*it);
+        color_map.insert(*it);
+    }
+
+    cout << "The r/place data set has been successfully loaded as a hashmap!" << endl;
+
+
 
     int userChoice = 0;
     string userString;
@@ -86,11 +79,7 @@ int main(int argc, char **argv) {
                     cout << "Please enter the userID" << endl;
                     cin >> searchUserID;
 
-                    if (dataTypeHash) {
-                        returnedPixelUpdate = userid_map.getUserFirst(searchUserID);
-                    } else {
-                        returnedPixelUpdate = nullptr; //PLACEHOLDER
-                    }
+                    returnedPixelUpdate = userid_map.getUserFirst(searchUserID);
 
                     if (returnedPixelUpdate == nullptr)
                         cout << "No results found" << endl;
@@ -101,12 +90,7 @@ int main(int argc, char **argv) {
                     cout << "Please enter the userID" << endl;
                     cin >> searchUserID;
 
-                    if(dataTypeHash){
-                        returnedPixelUpdate = userid_map.getUserLast(searchUserID);
-                    }
-                    else{
-                        returnedPixelUpdate = nullptr; //PLACEHOLDER
-                    }
+                    returnedPixelUpdate = userid_map.getUserLast(searchUserID);
 
                     if(returnedPixelUpdate == nullptr)
                         cout << "No results found" << endl;
@@ -120,11 +104,7 @@ int main(int argc, char **argv) {
                     cout << "Please enter the userID" << endl;
                     cin >> searchUserID;
 
-                    if (dataTypeHash) {
-                        returnedPixelUpdateList = userid_map.getUserAll(searchUserID);
-                    } else {
-                        returnedPixelUpdate = nullptr; //PLACEHOLDER
-                    }
+                    returnedPixelUpdateList = userid_map.getUserAll(searchUserID);
 
                     if (returnedPixelUpdate == nullptr)
                         cout << "No results found" << endl;
@@ -144,6 +124,11 @@ int main(int argc, char **argv) {
                 cin >> userString;
 
                 cout << endl << "This color was placed " << color_map.getBucketSize(userString) << " times." << endl;
+
+                returnedPixelUpdate = color_tree.search(userString);
+
+                cout << "This color was first placed by " << returnedPixelUpdate->userID << endl;
+                cout << "Coordinates: " << returnedPixelUpdate->coords << endl;
 
                 break;
             case 4:

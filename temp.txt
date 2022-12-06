@@ -1,7 +1,92 @@
-//temp
-
 In this file paste whatever you need to temp hold
-testtest
+
+/*if(argv[1] == (string)"-hashmap"){
+
+        dataTypeHash = true;
+
+        cout << "The r/place data set is being loaded into memory as a hashmap..." << endl;
+
+        for(auto it = rawPixelData.begin(); it != rawPixelData.end(); it++){
+            cord_map.insert(*it);
+            userid_map.insert(*it);
+            color_map.insert(*it);
+        }
+
+        cout << "The r/place data set has been successfully loaded as a hashmap!" << endl;
+
+    } else if(argv[1] == (string)"-bplustree"){
+
+        cout << "The r/place data set is being loaded into memory as a B+ Tree... (this might take a while)" << endl;
+        for(auto it = rawPixelData.begin(); it != rawPixelData.end(); it++){
+            userid_tree.insertID(*it);
+            color_tree.insertColor(*it);
+            coordinate_tree.insertCoordinates(*it);
+        }
+
+        cout << "The r/place data set has been successfully loaded as a B+ Tree!" << endl;
+    }*/
+
+cout << "1. Get first pixel edit (coordinates and color)" << endl;
+                cout << "2. Get last pixel edit (coordinates and color)" << endl;
+                cout << "3. Get number of pixels edited" << endl;
+                cout << "4. Print all edits made by this user" << endl;
+                cout << "5. Go back" << endl;
+
+                cin >> userChoice;
+                if (userChoice == 1) {
+                    cout << "Please enter the userID" << endl;
+                    cin >> searchUserID;
+
+                    if (dataTypeHash) {
+                        returnedPixelUpdate = userid_map.getUserFirst(searchUserID);
+                    } else {
+                        returnedPixelUpdate = nullptr; //PLACEHOLDER
+                    }
+
+                    if (returnedPixelUpdate == nullptr)
+                        cout << "No results found" << endl;
+                    else
+                        returnedPixelUpdate->printPixelUpdate();
+                }
+                else if(userChoice == 2){
+                    cout << "Please enter the userID" << endl;
+                    cin >> searchUserID;
+
+                    if(dataTypeHash){
+                        returnedPixelUpdate = userid_map.getUserLast(searchUserID);
+                    }
+                    else{
+                        returnedPixelUpdate = nullptr; //PLACEHOLDER
+                    }
+
+                    if(returnedPixelUpdate == nullptr)
+                        cout << "No results found" << endl;
+                    else
+                        returnedPixelUpdate->printPixelUpdate();
+                }
+
+                else if(userChoice == 3){}
+
+                else if(userChoice == 4) {
+                    cout << "Please enter the userID" << endl;
+                    cin >> searchUserID;
+
+                    if (dataTypeHash) {
+                        returnedPixelUpdateList = userid_map.getUserAll(searchUserID);
+                    } else {
+                        returnedPixelUpdate = nullptr; //PLACEHOLDER
+                    }
+
+                    if (returnedPixelUpdate == nullptr)
+                        cout << "No results found" << endl;
+                    else {
+
+                        for (auto iter: *returnedPixelUpdateList)
+                            iter.printPixelUpdate();
+                    }
+                }
+
+
 
 cout << "Hewwo, World!" << endl;
 

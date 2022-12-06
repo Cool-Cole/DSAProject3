@@ -28,7 +28,7 @@ public:
     void insertID(pixelUpdate* pixel);
     void insertColor(pixelUpdate* pixel);
     void insertCoordinates(pixelUpdate* pixel);
-    void search(string searchData);
+    pixelUpdate* search(string searchData);
     void printbplusTree(Node* root);
     Node* getRoot();
 };
@@ -376,7 +376,7 @@ void bplusTree::insertCoordinates(pixelUpdate* pixel) {
     }
 }
 
-void bplusTree::search(string searchData) {;
+pixelUpdate* bplusTree::search(string searchData) {;
     bool found = false;
     Node* nodePtr = root;
     hash<string> hasher;
@@ -396,6 +396,7 @@ void bplusTree::search(string searchData) {;
     }
     for (int i = 0; i < nodePtr->nodeSize; i++) {
         if(nodePtr->hashKey.at(i) == searchHashData){
+            return nodePtr->pixelData; // added this here so that we can look at what it finds
             found = true;
             break;
         }
@@ -406,5 +407,6 @@ void bplusTree::search(string searchData) {;
     else{
         cout << "No ID found" << endl;
     }
+    return nullptr;
 }
 #endif //DSAPROJECT3_BPLUSTREE_H
