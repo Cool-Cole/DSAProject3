@@ -20,7 +20,7 @@ class bplusTree {
     Node* root = nullptr;
     int maxLeaves;
     void insertLeafNode(Node* ptr, unsigned long long inputHashData);
-    void insertInnerNode(Node* ptr, unsigned long long inputHashData, Node* rightChild);
+    void insertInnerNode(Node* ptr, hasherHelper inputHashData, Node* rightChild);
 
 public:
     bplusTree();
@@ -39,7 +39,7 @@ bplusTree::bplusTree() {
 
 void bplusTree::insertLeafNode(Node* ptr, unsigned long long inputHashData){
     int i = 0;
-    while (i < ptr->nodeSize && inputHashData > ptr->hashKey.at(i))
+    while (i < ptr->nodeSize && ptr->hashKey.at(i) < inputHashData )
         i++;
     for (int j = ptr->nodeSize; j > i; j--) {
         ptr->hashKey.at(j) = ptr->hashKey.at(j-1);
@@ -48,7 +48,7 @@ void bplusTree::insertLeafNode(Node* ptr, unsigned long long inputHashData){
     ptr->nodeSize++;
 }
 
-void bplusTree::insertInnerNode(Node* ptr, unsigned long long inputHashData, Node* rightChild){
+void bplusTree::insertInnerNode(Node* ptr, hasherHelper inputHashData, Node* rightChild){
     int i = 0;
     while (i < ptr->nodeSize && inputHashData > ptr->hashKey.at(i))
         i++;
@@ -76,13 +76,14 @@ void bplusTree::insertID(pixelUpdate* pixel) {
         root->isLeaf = true;
         root->nodeSize = 1;
         root->hashKey.at(0) = inputHashData;
+        root->hashKey.at(0).pixel = pixel;
     }
     else {
         Node* nodePtr = root;
         //find leaf nodes
         while (!nodePtr->isLeaf) {
             for (int i = 0; i < nodePtr->nodeSize; i++) {
-                if (inputHashData < nodePtr->hashKey.at(i)) {
+                if (nodePtr->hashKey.at(i) > inputHashData) {
                     nodePtr = nodePtr->childPtr.at(i);
                     break;
                 }
@@ -173,7 +174,7 @@ void bplusTree::printbplusTree(Node* root) {
             cout << "isLeaf = false" << endl;
         }
         for (int i = 0; i < ptr->nodeSize; i++) {
-            cout << ptr->hashKey.at(i) << " ";
+            cout << ptr->hashKey.at(i).hashValue << " ";
         }
         cout << endl;
         if (!ptr->isLeaf) {
@@ -186,6 +187,7 @@ void bplusTree::printbplusTree(Node* root) {
 
 void bplusTree::insertColor(pixelUpdate* pixel) {
     hash<string> hasher;
+
     unsigned long long inputHashData = hasher(pixel->color);
     // for input is smaller int string, no hash
     //unsigned long long inputHashData = stoll(pixel->userID); // for testing
@@ -199,13 +201,15 @@ void bplusTree::insertColor(pixelUpdate* pixel) {
         root->isLeaf = true;
         root->nodeSize = 1;
         root->hashKey.at(0) = inputHashData;
+        root->hashKey.at(0).pixel = pixel;
+
     }
     else {
         Node* nodePtr = root;
         //find leaf nodes
         while (!nodePtr->isLeaf) {
             for (int i = 0; i < nodePtr->nodeSize; i++) {
-                if (inputHashData < nodePtr->hashKey.at(i)) {
+                if (nodePtr->hashKey.at(i) > inputHashData) {
                     nodePtr = nodePtr->childPtr.at(i);
                     break;
                 }
@@ -295,13 +299,14 @@ void bplusTree::insertCoordinates(pixelUpdate* pixel) {
         root->isLeaf = true;
         root->nodeSize = 1;
         root->hashKey.at(0) = inputHashData;
+        root->hashKey.at(0).pixel = pixel;
     }
     else {
         Node* nodePtr = root;
         //find leaf nodes
         while (!nodePtr->isLeaf) {
             for (int i = 0; i < nodePtr->nodeSize; i++) {
-                if (inputHashData < nodePtr->hashKey.at(i)) {
+                if (nodePtr->hashKey.at(i) > inputHashData) {
                     nodePtr = nodePtr->childPtr.at(i);
                     break;
                 }
@@ -384,7 +389,7 @@ pixelUpdate* bplusTree::search(string searchData) {;
     //unsigned long long searchHashData = stoll(searchData);
     while (!nodePtr->isLeaf) {
         for (int i = 0; i < nodePtr->nodeSize; i++) {
-            if (searchHashData < nodePtr->hashKey.at(i)) {
+            if (nodePtr->hashKey.at(i) > searchHashData) {
                 nodePtr = nodePtr->childPtr.at(i);
                 break;
             }
@@ -396,7 +401,7 @@ pixelUpdate* bplusTree::search(string searchData) {;
     }
     for (int i = 0; i < nodePtr->nodeSize; i++) {
         if(nodePtr->hashKey.at(i) == searchHashData){
-            return nodePtr->pixelData; // added this here so that we can look at what it finds
+            return nodePtr->hashKey.at(i).pixel; // added this here so that we can look at what it finds
             //found = true;
             //break;
         }

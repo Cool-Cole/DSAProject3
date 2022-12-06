@@ -19,12 +19,54 @@ using namespace std;
 
 using namespace std;
 
+class hasherHelper{
+public:
+
+    unsigned long long hashValue;
+    pixelUpdate* pixel = nullptr;
+
+    hasherHelper operator= (unsigned long long temp){
+        this->hashValue = temp;
+    }
+
+    hasherHelper operator= (hasherHelper temp){
+        this->hashValue = temp.hashValue;
+        this->pixel = temp.pixel;
+    }
+
+    bool operator> (hasherHelper temp){
+        return (this->hashValue > temp.hashValue) ? true : false;
+    }
+
+    bool operator> (unsigned long long temp){
+        return (this->hashValue > temp) ? true : false;
+    }
+
+    bool operator< (hasherHelper temp){
+        return (this->hashValue < temp.hashValue) ? true : false;
+    }
+
+    bool operator< (unsigned long long temp){
+        return (this->hashValue < temp) ? true : false;
+    }
+
+    bool operator== (hasherHelper temp){
+        return (this->hashValue == temp.hashValue) ? true : false;
+    }
+
+    bool operator== (unsigned long long temp){
+        return (this->hashValue == temp) ? true : false;
+    }
+
+};
+
 class Node {
 public:
     bool isLeaf;
     int nodeSize;
     pixelUpdate* pixelData;
-    vector<unsigned long long> hashKey;
+    //vector<unsigned long long> hashKey;
+    vector<hasherHelper> hashKey;
     vector<Node*> childPtr;
     //Node **childPtr;
     Node* parentNodePtr;
