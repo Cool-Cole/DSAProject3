@@ -106,12 +106,15 @@ public:
 
     unsigned int hash(string userID){
 
-        unsigned int hash = 0x55555555;;
+        int hash = 0;;
 
         int temp = userID.size();
         for(int i = 0; i < temp; i++){
-            hash ^= userID.at(i);
-            hash = hash << 5;
+            hash = 37*hash+userID.at(i);
+        }
+
+        if(hash < 0){
+            hash += bucketCount;
         }
 
         return hash % bucketCount;
