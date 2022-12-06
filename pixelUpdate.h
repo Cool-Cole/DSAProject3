@@ -12,12 +12,15 @@ using namespace std;
 class pixelUpdate{
 public:
 
-    void printPixelUpdate(){
+    void printPixelUpdate(string mod = ""){
         cout << "Date and Time: " << dateTime << endl;
         cout << "Time since start: " << timeSinceStart << " seconds" << endl;
-        cout << "UserID responsible: " << userID << endl;
-        cout << "Color: " << color << endl;
-        cout << "Coordinates: " << pixelX << ", " << pixelY << endl << endl;
+        if(mod != "userid")
+            cout << "UserID responsible: " << userID << endl;
+        if(mod != "color")
+            cout << "Color: " << color << endl;
+        if(mod != "coordinates")
+            cout << "Coordinates: " << pixelX << ", " << pixelY << endl << endl;
     }
 
     //Primary Constructor

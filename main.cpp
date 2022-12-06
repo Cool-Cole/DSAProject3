@@ -90,7 +90,7 @@ int main(int argc, char **argv) {
                     if(returnedPixelUpdate == nullptr)
                         cout << "No results found" << endl;
                     else
-                        returnedPixelUpdate->printPixelUpdate();
+                        returnedPixelUpdate->printPixelUpdate("userid");
                 }
                 else if(userChoice == 3){
                     cout << "Please enter the userID" << endl;
@@ -109,7 +109,7 @@ int main(int argc, char **argv) {
                     else {
 
                         for (auto iter: *returnedPixelUpdateList)
-                            iter->printPixelUpdate();
+                            iter->printPixelUpdate("userid");
                     }
                 }
                 break;
@@ -136,7 +136,7 @@ int main(int argc, char **argv) {
                     if (returnedPixelUpdate == nullptr)
                         cout << "No results found" << endl;
                     else
-                        returnedPixelUpdate->printPixelUpdate();
+                        returnedPixelUpdate->printPixelUpdate("coordinates");
                 }
                 else if(userChoice == 3){
                     cout << "Enter pixel coordinate:" << endl;
@@ -157,7 +157,7 @@ int main(int argc, char **argv) {
                     else {
 
                         for (auto iter: *returnedPixelUpdateList)
-                            iter->printPixelUpdate();
+                            iter->printPixelUpdate("coordinates");
                     }
                 }
                 break;
@@ -184,7 +184,7 @@ int main(int argc, char **argv) {
                     if (returnedPixelUpdate == nullptr)
                         cout << "No results found" << endl;
                     else
-                        returnedPixelUpdate->printPixelUpdate();
+                        returnedPixelUpdate->printPixelUpdate("color");
                 }
                 else if(userChoice == 3){
                     cout << "Enter color:" << endl;
@@ -205,7 +205,7 @@ int main(int argc, char **argv) {
                     else {
 
                         for (auto iter: *returnedPixelUpdateList)
-                            iter->printPixelUpdate();
+                            iter->printPixelUpdate("color");
                     }
                 }
                 break;
