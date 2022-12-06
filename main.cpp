@@ -127,8 +127,7 @@ int main(int argc, char **argv) {
 
                 returnedPixelUpdate = color_tree.search(userString);
 
-                cout << "This color was first placed by " << returnedPixelUpdate->userID << endl;
-                cout << "Coordinates: " << returnedPixelUpdate->coords << endl;
+                returnedPixelUpdate->printPixelUpdate();
 
                 break;
             case 4:
