@@ -193,7 +193,7 @@ int main(int argc, char **argv) {
                     cout << "Enter color:" << endl;
                     cin >> userString;
 
-                    returnedPixelUpdate = cord_map.getPixelColorLast(userString);
+                    returnedPixelUpdate = color_map.getPixelColorLast(userString);
 
                     if (returnedPixelUpdate == nullptr)
                         cout << "No results found" << endl;
@@ -204,9 +204,9 @@ int main(int argc, char **argv) {
                     cout << "Enter color:" << endl;
                     cin >> userString;
 
-                    unsigned int result = cord_map.getPixelColorCount(userString);
+                    unsigned int result = cord_map.getColorCount(userString);
 
-                    cout << "The pixel at " << userString << " has been updated " << result << " times."<< endl;
+                    cout << "The color " << userString << " has been placed " << result << " times."<< endl;
                 }
                 else if(userChoice == 4){
                     cout << "Enter color:" << endl;
