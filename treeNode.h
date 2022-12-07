@@ -25,6 +25,10 @@ public:
     unsigned long long hashValue;
     pixelUpdate* pixel = nullptr;
 
+    hasherHelper(){
+        pixel = nullptr;
+    }
+
     hasherHelper operator= (unsigned long long temp){
         this->hashValue = temp;
         return *this;

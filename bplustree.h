@@ -405,9 +405,12 @@ pixelUpdate* bplusTree::search(string searchData, string type) {;
     Node* nodePtr = root;
     hash<string> hasher;
     unsigned long long searchHashData = hasher(searchData);
+
+    pixelUpdate* temp;
+
     //unsigned long long searchHashData = stoll(searchData);
     while (!nodePtr->isLeaf) {
-        /*for (int i = 0; i < nodePtr->nodeSize; i++) {
+        for (int i = 0; i < nodePtr->nodeSize; i++) {
             if (nodePtr->hashKey.at(i) > searchHashData) {
                 nodePtr = nodePtr->childPtr.at(i);
                 break;
@@ -416,20 +419,17 @@ pixelUpdate* bplusTree::search(string searchData, string type) {;
                 nodePtr = nodePtr->childPtr.at(i + 1);
                 break;
             }
-        }*/
-        nodePtr = nodePtr->childPtr.at(0);
-    }
-    while(nodePtr->nextLeafPtr){
-        //
+
+            temp = nodePtr->hashKey.at(i).pixel;
+        }
     }
 
     for (int i = 0; i < nodePtr->nodeSize; i++) {
         if(nodePtr->hashKey.at(i) == searchHashData){
-            found = true;
-            return nodePtr->hashKey.at(i).pixel;
+            temp = nodePtr->hashKey.at(i).pixel;
         }
     }
 
-    return nodePtr->pixelData;
+    return temp;
 }
 #endif //DSAPROJECT3_BPLUSTREE_H
