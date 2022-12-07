@@ -19,8 +19,8 @@ using namespace std;
 class bplusTree {
     Node* root = nullptr;
     int maxLeaves;
-    void insertLeafNode(Node* ptr, unsigned long long inputHashData);
-    void insertInnerNode(Node* ptr, hasherHelper inputHashData, Node* rightChild);
+    void insertLeafNode(Node* ptr, unsigned long long inputHashData, pixelUpdate* pixel);
+    void insertInnerNode(Node* ptr, hasherHelper inputHashData, Node* rightChild, pixelUpdate* pixel);
 
 public:
     bplusTree();
@@ -37,7 +37,7 @@ bplusTree::bplusTree() {
     maxLeaves = 4;
 }
 
-void bplusTree::insertLeafNode(Node* ptr, unsigned long long inputHashData){
+void bplusTree::insertLeafNode(Node* ptr, unsigned long long inputHashData, pixelUpdate* pixel){
     int i = 0;
     while (i < ptr->nodeSize && ptr->hashKey.at(i) < inputHashData )
         i++;
@@ -45,10 +45,11 @@ void bplusTree::insertLeafNode(Node* ptr, unsigned long long inputHashData){
         ptr->hashKey.at(j) = ptr->hashKey.at(j-1);
     }
     ptr->hashKey.at(i) = inputHashData;
+    ptr->hashKey.at(i).pixel = pixel;
     ptr->nodeSize++;
 }
 
-void bplusTree::insertInnerNode(Node* ptr, hasherHelper inputHashData, Node* rightChild){
+void bplusTree::insertInnerNode(Node* ptr, hasherHelper inputHashData, Node* rightChild, pixelUpdate* pixel){
     int i = 0;
     while (i < ptr->nodeSize && inputHashData > ptr->hashKey.at(i))
         i++;
@@ -57,6 +58,7 @@ void bplusTree::insertInnerNode(Node* ptr, hasherHelper inputHashData, Node* rig
         ptr->childPtr[j+1] = ptr->childPtr[j];
     }
     ptr->hashKey.at(i) = inputHashData;
+    ptr->hashKey.at(i).pixel = pixel;
     ptr->nodeSize++;
     ptr->childPtr[i+1] = rightChild;
 }
@@ -98,7 +100,7 @@ void bplusTree::insertID(pixelUpdate* pixel) {
             }
         }
         //insert input data to the sorted key place
-        insertLeafNode(nodePtr, inputHashData);
+        insertLeafNode(nodePtr, inputHashData, pixel);
         //check if need to split nodeptr nodes if over the limit
         while((nodePtr->isLeaf && nodePtr->nodeSize>maxLeaves) || (!nodePtr->isLeaf && nodePtr->nodeSize>maxLeaves-1)) {
             if (nodePtr->isLeaf) {
@@ -128,7 +130,7 @@ void bplusTree::insertID(pixelUpdate* pixel) {
                     splitNode->parentNodePtr = newParent;
                     root = newParent;
                 } else {
-                    insertInnerNode(nodePtr->parentNodePtr, splitNode->hashKey.at(0), splitNode);
+                    insertInnerNode(nodePtr->parentNodePtr, splitNode->hashKey.at(0), splitNode, pixel);
                 }
             }
                 // else split non leaf node
@@ -157,7 +159,7 @@ void bplusTree::insertID(pixelUpdate* pixel) {
                     splitNode->parentNodePtr = newParent;
                     root = newParent;
                 } else {
-                    insertInnerNode(nodePtr->parentNodePtr, nodePtr->hashKey.at(splitIndex), splitNode);
+                    insertInnerNode(nodePtr->parentNodePtr, nodePtr->hashKey.at(splitIndex), splitNode, pixel);
                 }
             }
             nodePtr = nodePtr->parentNodePtr;
@@ -229,7 +231,7 @@ void bplusTree::insertColor(pixelUpdate* pixel) {
             }
         }
         //insert input data to the sorted key place
-        insertLeafNode(nodePtr, inputHashData);
+        insertLeafNode(nodePtr, inputHashData, pixel);
         //check if need to split nodeptr nodes if over the limit
         while((nodePtr->isLeaf && nodePtr->nodeSize>maxLeaves) || (!nodePtr->isLeaf && nodePtr->nodeSize>maxLeaves-1)) {
             if (nodePtr->isLeaf) {
@@ -259,7 +261,7 @@ void bplusTree::insertColor(pixelUpdate* pixel) {
                     splitNode->parentNodePtr = newParent;
                     root = newParent;
                 } else {
-                    insertInnerNode(nodePtr->parentNodePtr, splitNode->hashKey.at(0), splitNode);
+                    insertInnerNode(nodePtr->parentNodePtr, splitNode->hashKey.at(0), splitNode, pixel);
                 }
             }
                 // else split non leaf node
@@ -288,7 +290,7 @@ void bplusTree::insertColor(pixelUpdate* pixel) {
                     splitNode->parentNodePtr = newParent;
                     root = newParent;
                 } else {
-                    insertInnerNode(nodePtr->parentNodePtr, nodePtr->hashKey.at(splitIndex), splitNode);
+                    insertInnerNode(nodePtr->parentNodePtr, nodePtr->hashKey.at(splitIndex), splitNode, pixel);
                 }
             }
             nodePtr = nodePtr->parentNodePtr;
@@ -331,7 +333,7 @@ void bplusTree::insertCoordinates(pixelUpdate* pixel) {
             }
         }
         //insert input data to the sorted key place
-        insertLeafNode(nodePtr, inputHashData);
+        insertLeafNode(nodePtr, inputHashData, pixel);
         //check if need to split nodeptr nodes if over the limit
         while((nodePtr->isLeaf && nodePtr->nodeSize>maxLeaves) || (!nodePtr->isLeaf && nodePtr->nodeSize>maxLeaves-1)) {
             if (nodePtr->isLeaf) {
@@ -361,7 +363,7 @@ void bplusTree::insertCoordinates(pixelUpdate* pixel) {
                     splitNode->parentNodePtr = newParent;
                     root = newParent;
                 } else {
-                    insertInnerNode(nodePtr->parentNodePtr, splitNode->hashKey.at(0), splitNode);
+                    insertInnerNode(nodePtr->parentNodePtr, splitNode->hashKey.at(0), splitNode, pixel);
                 }
             }
                 // else split non leaf node
@@ -390,7 +392,7 @@ void bplusTree::insertCoordinates(pixelUpdate* pixel) {
                     splitNode->parentNodePtr = newParent;
                     root = newParent;
                 } else {
-                    insertInnerNode(nodePtr->parentNodePtr, nodePtr->hashKey.at(splitIndex), splitNode);
+                    insertInnerNode(nodePtr->parentNodePtr, nodePtr->hashKey.at(splitIndex), splitNode, pixel);
                 }
             }
             nodePtr = nodePtr->parentNodePtr;
