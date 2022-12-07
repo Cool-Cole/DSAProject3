@@ -405,7 +405,7 @@ pixelUpdate* bplusTree::search(string searchData, string type) {;
     unsigned long long searchHashData = hasher(searchData);
     //unsigned long long searchHashData = stoll(searchData);
     while (!nodePtr->isLeaf) {
-        for (int i = 0; i < nodePtr->nodeSize; i++) {
+        /*for (int i = 0; i < nodePtr->nodeSize; i++) {
             if (nodePtr->hashKey.at(i) > searchHashData) {
                 nodePtr = nodePtr->childPtr.at(i);
                 break;
@@ -414,7 +414,11 @@ pixelUpdate* bplusTree::search(string searchData, string type) {;
                 nodePtr = nodePtr->childPtr.at(i + 1);
                 break;
             }
-        }
+        }*/
+        nodePtr = nodePtr->childPtr.at(0);
+    }
+    while(nodePtr->nextLeafPtr){
+        //
     }
 
     for (int i = 0; i < nodePtr->nodeSize; i++) {
