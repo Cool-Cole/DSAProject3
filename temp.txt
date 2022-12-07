@@ -1,5 +1,23 @@
 In this file paste whatever you need to temp hold
 
+cout << endl;
+
+    if(type == "coordinate"){
+        cout << "Date and Time: " << nodePtr->pixelData->dateTime << endl;
+        cout << "Color: " << nodePtr->pixelData->color << endl;
+        cout << "UserID responsible: " << nodePtr->pixelData->userID << endl;
+    } else if (type == "color"){
+        cout << "Date and Time: " << nodePtr->pixelData->dateTime << endl;
+        cout << "UserID responsible: " << nodePtr->pixelData->userID << endl;
+        cout << "Coordinates: " << nodePtr->pixelData->coords << endl;
+    } else if (type == "userid"){
+        cout << "Date and Time: " << nodePtr->pixelData->dateTime << endl;
+        cout << "Coordinates: " << nodePtr->pixelData->coords << endl;
+        cout << "Color: " << nodePtr->pixelData->color << endl;
+    }
+
+    cout << endl;
+
 /*if(argv[1] == (string)"-hashmap"){
 
         dataTypeHash = true;

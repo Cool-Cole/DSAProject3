@@ -417,6 +417,13 @@ pixelUpdate* bplusTree::search(string searchData, string type) {;
         }
     }
 
+    for (int i = 0; i < nodePtr->nodeSize; i++) {
+        if(nodePtr->hashKey.at(i) == searchHashData){
+            found = true;
+            return nodePtr->hashKey.at(i).pixel;
+        }
+    }
+
     return nodePtr->pixelData;
 }
 #endif //DSAPROJECT3_BPLUSTREE_H

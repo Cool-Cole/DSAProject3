@@ -27,11 +27,13 @@ public:
 
     hasherHelper operator= (unsigned long long temp){
         this->hashValue = temp;
+        return *this;
     }
 
     hasherHelper operator= (hasherHelper temp){
         this->hashValue = temp.hashValue;
         this->pixel = temp.pixel;
+        return *this;
     }
 
     bool operator> (hasherHelper temp){

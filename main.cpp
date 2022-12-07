@@ -43,14 +43,12 @@ int main(int argc, char **argv) {
     cout << "The r/place data set is being loaded into memory as a hashmap..." << endl;
 
     for(auto it = rawPixelData.begin(); it != rawPixelData.end(); it++){
-        cord_map.insert(*it);
-        userid_map.insert(*it);
-        color_map.insert(*it);
+        //cord_map.insert(*it);
+        //userid_map.insert(*it);
+        //color_map.insert(*it);
     }
 
     cout << "The r/place data set has been successfully loaded as a hashmap!" << endl;
-
-
 
     int userChoice = 0;
     string userString;
