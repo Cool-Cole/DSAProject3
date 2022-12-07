@@ -82,7 +82,7 @@ int main(int argc, char **argv) {
                     if (returnedPixelUpdate == nullptr)
                         cout << "No results found" << endl;
                     else
-                        returnedPixelUpdate->printPixelUpdate("coordinates");
+                        returnedPixelUpdate->printPixelUpdate("userid");
 
                 }
                 else if(userChoice == 2){
